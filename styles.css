@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/*Headder*/
+
+
+header { 
+    position: fixed;
+    height: 100px;
+    width : 100%;
+    top: 0;
+    right: 0;
+    margin-top: 0px;
+    z-index: 999;
+    background-color: rgb(246, 255, 0);
+    display: block;
+    border-bottom: 4px rgb(0, 0, 0) solid;
+    color: white;
+}
+
+#divlogo {
+    width: 80px;
+    height: 100%;
+    margin-right: 30px;
+}
+#LogoSoleMeo {
+    margin-top: 5px;
+    width: 100%;
+    height: 80px;
+    max-height: 100%;
+}
+
+
+#Titre {
+    height: 70%;
+    width: 100%;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    margin-top: 30px;   
+    font-size: 30px; 
+    font-size: 200%;
+}
+
+#navbandeau {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#divTitre {
+    width:70%;
+    height: 100%;
+}
+
+
+/*Headder*/
+
+
+/*Body*/
+
+
+body {
+    position: absolute;
+    margin-top: 100px;
+    width : 100%;
+    height: 100%;
+    border: solid red 2px;
+    font-family: 'Inter', sans-serif;
+    flex-direction: column;  
+    background-color: rgb(255, 255, 255);  
+    color: white;
+}
+
+#Debut {
+   visibility: hidden;
+}
+a:visited {
+    color : hsl(208, 90%, 38%);
+}
+a:hover {
+    color : orange;
+}
+
+#navmenuselection a:visited {
+    color: rgb(178, 176, 176);
+}
+#navmenuselection a {
+    color: rgb(178, 176, 176);
+}
+#navmenuselection a:hover {
+    color : rgb(0, 0, 0);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+
+/*Body*/
+
+
+/*Menu de selection*/
+
+@media (width < 705px) {
+    #navmenuselection {
+        display: none;
+        background-color: rgb(229, 241, 10);
+    }
+
+    #Titre {
+        font-size: 185%;
+    }
+
+    #divTitre {
+        width: 100%;
+    }
+
+    #navbouttonBurger {
+        height: 100%;
+        width: 20%;
+    }
+
+    .Sous-menuburger {
+        margin: 6px;
+    }
+
+    #navbouttonBurger div {
+        position: relative;
+        top: 12px;
+        left: 20px;
+        width: 30px;
+        height: 20px;
+    }
+
+    #bouttonBurger {
+        position: fixed;
+        top: 12px;
+        left: 20px;
+        width: 30px;
+        height: 20px;
+    }
+
+    #divdessusbouttonburger:hover #bouttonBurger {
+        display: none;
+    }
+
+    #divdessusbouttonburger div:hover {
+        border: solid rgb(229, 241, 10) 2px;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(229, 241, 10);
+    }
+
+    #divdessusbouttonburger div:hover a{
+        width: 100%;
+        height: 100%;
+        background-color: rgb(229, 241, 10);
+    }
+
+    #divdessusbouttonburger:hover div {
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        border: solid rgb(255, 255, 255) 2px;
+    }
+
+    nav #divdessusbouttonburger:hover {
+        height: 100px;
+        width: 100px;
+    }
+
+    div:hover .divsousmenuburger {
+        display: block;
+        margin-top: 3px solid;
+        background-color: rgb(229, 241, 10);
+        width: 500px;
+        height: 500px;
+        border: solid rgb(0, 0, 0) 2px;
+    }    
+    
+    .divsousmenuburger {
+        display: none;
+    }
+}
+
+@media (width > 705px) {
+    #bouttonBurger {
+        display: none;
+    }
+
+    #navbouttonBurger {
+        display: none;
+    }
+}
+
+@media (width > 705px) {
+    #navmenuselection {
+        width: 30%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.DivBoutonsPrincipaux {
+    background-color: rgb(229, 241, 10);
+    border-left: 4px solid;
+    align-self: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    border: solid 1px rgb(0, 0, 0);
+
+}
+
+.Sous-menu1 {
+    display: none;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: rgb(229, 241, 10);
+    margin: 6px;
+}
+
+#navmenuselection:hover div div {
+    border: solid 4px transparent;
+}
+
+div:hover div .Sous-menu1 {
+    display: block;
+}
+
+.DivBoutonsPrincipaux:hover div {
+    background-color: rgb(229, 241, 10);
+}
+
+
+/*Menu de selection*/
+
+
+/*Images en bas à droite*/
+
+
+.ImgReseaux {
+    position : fixed;
+    bottom : 10px;
+    right : 10px;
+    float : right;
+    display : flex;
+    flex-direction : column;
+    max-width: 20px;
+    min-width: 10px;
+    width: 20px;
+}
+
+#imggmail {
+    border : solid 2px transparent;
+}
+
+#imglinkedin {
+    border : solid 2px transparent;
+}
+
+
+/*Images en bas à droite*/
+
+main {
+    background: url(Images/FondSite.png) fixed 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+footer {
+    height: 30%;
+}
+
+.messageCentre {
+    width: 400px;
+    text-align: center;
+    font-size: 100%;
+    width: 60%;
+    overflow: hidden;
+    max-height: 80%;
+}
+
+#bandeau1 {
+    margin: 0px;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#bandeau2 {
+    margin: 0px;
+    background-color: rgb(255, 255, 0);
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+}
+
+#divTextBandeau2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    overflow: hidden;
+}
+
+#textBandeau2 {
+    width: 70%;
+    font-size: 100%;
+    max-height: 70%;
+    overflow: hidden;
+}
+
+#divimgBandeau2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+}
+
+#imgBandeau2 {
+    width: 30%;
+    height: 30%;
+}
