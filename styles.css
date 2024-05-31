@@ -1,66 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-/*Headder*/
 
 
-header { 
-    position: fixed;
-    height: 100px;
-    width : 100%;
-    top: 0;
-    right: 0;
-    margin-top: 0px;
-    z-index: 999;
-    background-color: rgb(246, 255, 0);
-    display: block;
-    border-bottom: 4px rgb(0, 0, 0) solid;
-    color: white;
-}
-
-#divlogo {
-    width: 80px;
-    height: 100%;
-    margin-right: 30px;
-}
-#LogoSoleMeo {
-    margin-top: 5px;
-    width: 100%;
-    height: 80px;
-    max-height: 100%;
-}
-
-
-#Titre {
-    height: 70%;
-    width: 100%;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    margin-top: 30px;   
-    font-size: 30px; 
-    font-size: 200%;
-}
-
-#navbandeau {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-}
-
-#divTitre {
-    width:70%;
-    height: 100%;
-}
-
-
-/*Headder*/
-
-
-/*Body*/
+/*  -------------  Body  -------------  */
 
 
 body {
@@ -73,25 +15,23 @@ body {
     color: white;
 }
 
-#Debut {
-    margin-top: 0px;
-   visibility: hidden;
-}
-a:visited {
-    color : hsl(208, 90%, 38%);
-}
-a:hover {
-    color : orange;
+.poppins-light {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
 }
 
-#navmenuselection a:visited {
-    color: rgb(178, 176, 176);
+#Debut {
+    margin-top: 0px;
+    visibility: hidden;
 }
-#navmenuselection a {
-    color: rgb(178, 176, 176);
+
+a {
+    color: black;
 }
-#navmenuselection a:hover {
-    color : rgb(0, 0, 0);
+
+a:hover {
+    color : orange;
 }
 
 * {
@@ -99,179 +39,203 @@ a:hover {
     padding: 0;
     text-decoration: none;
     list-style: none;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
 
 
-/*Body*/
+/*  -------------  Body  -------------  */
 
 
-/*Menu de selection*/
 
-@media (width < 705px) {
-    #navmenuselection {
-        display: none;
-        background-color: rgb(229, 241, 10);
+/*  -------------  Headder  -------------  */
+
+
+header { 
+    position: fixed;
+    height: 100px;
+    width : 100%;
+    top: 0;
+    right: 0;
+    margin-top: 0px;
+    z-index: 999;
+    display: block;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.2);
+    gap: 20px;
+}
+
+    /*    Logo en haut à droite    */
+
+    #divlogo {
+        height: 100%;
+        margin: auto auto auto 10px;
+        display: flex;
+        align-items: center;
+        min-width: 80px;
+        height: 80px;
+    }
+
+    #LogoSoleMeo {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+    }
+
+    /*    Logo en haut à droite    */
+
+    /*    Titre bandeau    */
+
+    #divTitre {
+        height: 100%;
+        min-width: 200px;
     }
 
     #Titre {
-        font-size: 185%;
-    }
-
-    #divTitre {
+        height: 70%;
         width: 100%;
-    }
-
-    #navbouttonBurger {
-        height: 100%;
-        width: 20%;
-    }
-
-    .Sous-menuburger {
-        margin: 6px;
-    }
-
-    #navbouttonBurger div {
-        position: relative;
-        top: 12px;
-        left: 20px;
-        width: 30px;
-        height: 20px;
-    }
-
-    #bouttonBurger {
-        position: fixed;
-        top: 12px;
-        left: 20px;
-        width: 30px;
-        height: 20px;
-    }
-
-    #divdessusbouttonburger:hover #bouttonBurger {
-        display: none;
-    }
-
-    #divdessusbouttonburger div:hover {
-        border: solid rgb(229, 241, 10) 2px;
-        width: 100%;
-        height: 100%;
-    }
-
-    #divdessusbouttonburger div:hover a{
-        width: 100%;
-        height: 100%;
-    }
-
-    #divdessusbouttonburger:hover div {
-        width: 80px;
-        height: 80px;
+        color: rgb(0, 0, 0);
         text-align: center;
-        border: solid rgb(0, 0, 0) 2px;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        margin-top: 30px;   
+        font-size: 30px; 
+        font-size: 200%;
+        font-weight: bold;
     }
 
-    nav #divdessusbouttonburger:hover {
-        height: 100px;
-        width: 100px;
-    }
+    /*    Titre bandeau    */
 
-    div:hover .divsousmenuburger {
-        display: block;
-        margin-top: 3px solid;
-        background-color: rgb(229, 241, 10);
-        width: 500px;
-        height: 500px;
-        border: solid rgb(0, 0, 0) 2px;
-    }    
+
+    /*    Menu de selection    */
+
+    .LiMenuSelection {
+        list-style: none;
+    }
     
-    .divsousmenuburger {
-        display: none;
-    }
-}
-
-@media (width > 705px) {
-    #bouttonBurger {
-        display: none;
-    }
-
-    #navbouttonBurger {
-        display: none;
-    }
-}
-
-@media (width > 705px) {
-    #navmenuselection {
-        width: 30%;
-        height: 100%;
+    #navMenus {
+        width: 100%;
+        max-width: 1200px;
+        height: 100px;
+        margin: 0 auto;
+        border: solid 2px red;
         display: flex;
-        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
-}
 
-.DivBoutonsPrincipaux {
-    background-color: rgb(229, 241, 10);
-    border-left: 4px solid;
-    align-self: center;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    border: solid 1px rgb(0, 0, 0);
+    #navMenus .links {
+        display: flex;
+        gap: 2rem;
+    }
 
-}
+    #navMenus .menuBurger {
+        color: black;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: none;
+    }
+    
+    .ActionButton {
+        border: solid 1px rgb(230, 215, 9);
+        background-color: rgb(230, 215, 9);
+        padding: 0.5rem 1.2rem;
+        border-radius: 5px;
+        outline: none;
+        font-size: 0.9rem;
+        color: black;
+    }
 
-.Sous-menu1 {
-    display: none;
-    border: 1px solid rgb(0, 0, 0);
-    background-color: rgb(229, 241, 10);
-    margin: 6px;
-}
+    .ActionButton:hover {
+        border: 1px solid white;
+        color: white;
+    }
 
-#navmenuselection:hover div div {
-    border: solid 4px transparent;
-}
+    .Connexion {
+        background-color: transparent;
+        color: rgb(0, 0, 0);
+        border: 1px solid rgb(135, 176, 212);
+        padding: 0.5rem 1.2rem;
+        border-radius: 5px;
+        outline: none;
+        font-size: 0.9rem;
+    }
 
-div:hover div .Sous-menu1 {
-    display: block;
-}
+    .Connexion:hover {
+        background-color: rgb(135, 176, 212);
+        color: rgb(255, 255, 255);
+    }
 
-.DivBoutonsPrincipaux:hover div {
-}
+        /*    Menu burger    */
+
+        .menuBurger {
+            display: none;
+            position: absolute;
+            right: 2rem;
+            top: 60px;
+            width: 200px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(3px);
+            overflow: hidden;
+        }   
+
+        .buttons-Burger {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-bottom: transparent solid 15px; 
+        }
+
+        .menuBurger .LiMenuSelection,
+        .menuBurger .buttons-Burger{
+            width: 78%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: white;
+            width: 80%;
+            margin: auto auto 1rem auto;
+        }
+
+        .menuBurger .LiMenuSelection {
+            padding: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menuBurger .ActionButton,
+        .menuBurger .Connexion {
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /*    Menu burger    */
+
+    /*    Menu de selection    */
 
 
-/*Menu de selection*/
-
-
-/*Images en bas à droite*/
-
-
-.ImgReseaux {
-    position : fixed;
-    bottom : 10px;
-    right : 10px;
-    float : right;
-    display : flex;
-    flex-direction : column;
-    max-width: 20px;
-    min-width: 10px;
-    width: 20px;
-}
-
-#imggmail {
-    border : solid 2px transparent;
-}
-
-#imglinkedin {
-    border : solid 2px transparent;
-}
-
-
-/*Images en bas à droite*/
+/*  -------------  Headder  -------------  */
 
 
 
-/*Main*/
+/*  -------------  Main  -------------  */
 
 
 main {
-    background: url(Images/FondSite.png) fixed 100%;
+    background: url(Images/FondSite.jpg) fixed 100%;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -280,119 +244,135 @@ main {
     height: 100%;
 }
 
-.messageCentre {
-    margin-top: 100px;
-    width: 400px;
-    text-align: center;
-    font-size: 100%;
-    width: 60%;
-    overflow: hidden;
-    max-height: 80%;
-}
 
-#bandeau1 {
-    margin: 0px;
-    height: 200%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    /*    Bandeau N°1    */
 
-#bandeau2 {
-    margin: 0px;
-    background-color: rgb(255, 255, 0);
-    color: rgb(0, 0, 0);
-    display: flex;
-    flex-direction: row;
-    height: 50%;
-}
+    .messageCentre {
+        margin-top: 100px;
+        width: 400px;
+        text-align: center;
+        font-size: 100%;
+        width: 60%;
+        overflow: hidden;
+        max-height: 80%;
+    }
 
-#divTextBandeau2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%;
-    overflow: hidden;
-}
+    #bandeau1 {
+        margin: 0px;
+        height: 200%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-#textBandeau2 {
-    width: 70%;
-    font-size: 100%;
-    max-height: 70%;
-    overflow: hidden;
-}
-
-#divimgBandeau2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 35%;
-}
-
-#imgBandeau2 {
-    width: 30%;
-    height: 30%;
-}
-
-#bandeau3 {
-    background: url(Images/FondSite.png) fixed 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0px;
-    color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: row-reverse;
-    height: 50%;
-}
-
-#divTextBandeau3 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%;
-    overflow: hidden;
-}
-
-#textBandeau3 {
-    width: 70%;
-    font-size: 100%;
-    max-height: 70%;
-    overflow: hidden;
-}
-
-#divimgBandeau3 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 35%;
-}
-
-#imgBandeau3 {
-    width: 30%;
-    height: 30%;
-}
+    /*    Bandeau N°1    */
 
 
-/*Main*/
+    /*    Bandeau N°2    */
+
+    #bandeau2 {
+        margin: 0px;
+        background-color: rgb(255, 255, 0);
+        color: rgb(0, 0, 0);
+        display: flex;
+        flex-direction: row;
+        height: 50%;
+    }
+
+    #divTextBandeau2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+        overflow: hidden;
+    }
+
+    #textBandeau2 {
+        width: 70%;
+        font-size: 100%;
+        max-height: 70%;
+        overflow: hidden;
+    }
+
+    #divimgBandeau2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 35%;
+    }
+
+    #imgBandeau2 {
+        width: 30%;
+        height: 30%;
+    }
+
+    /*    Bandeau N°2    */
 
 
-/*Footer*/
+    /*    Bandeau N°3    */
+
+    #bandeau3 {
+        background: url(Images/FondSite.jpg) fixed 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0px;
+        color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: row-reverse;
+        height: 50%;
+    }
+
+    #divTextBandeau3 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+        overflow: hidden;
+    }
+
+    #textBandeau3 {
+        width: 70%;
+        font-size: 100%;
+        max-height: 70%;
+        overflow: hidden;
+    }
+
+    #divimgBandeau3 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 35%;
+    }
+
+    #imgBandeau3 {
+        width: 30%;
+        height: 30%;
+    }
+
+    /*    Bandeau N°3    */
+
+
+/*  -------------  Main  -------------  */
+
+
+
+/*  -------------  Footer  -------------  */
 
 
 footer {
@@ -400,30 +380,84 @@ footer {
     background-color: rgb(87, 87, 87);
 }
 
-.btn{
-    display: block;
-    margin: 150px auto 0;
-    font-size: 30px;
-    font-weight: lighter;
-    color: #333;
-    padding: 25px 80px;
-    background: #ffd17b;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 20px;
-    position: relative;
-    box-shadow: 0 6px #efa424;
+    /*    Images réseaux    */
+
+    .ImgReseaux {
+        position : fixed;
+        bottom : 10px;
+        right : 10px;
+        float : right;
+        display : flex;
+        flex-direction : column;
+        max-width: 20px;
+        min-width: 10px;
+        width: 20px;
+    }
+
+    #imggmail {
+        border : solid 2px transparent;
+    }
+
+    #imglinkedin {
+        border : solid 2px transparent;
+    }
+
+    /*    Images réseaux    */
+
+
+    /*    Boutton    */
+
+    .btn{
+        display: block;
+        margin: 150px auto 0;
+        font-size: 30px;
+        font-weight: lighter;
+        color: #333;
+        padding: 25px 80px;
+        background: #ffd17b;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 20px;
+        position: relative;
+        box-shadow: 0 6px #efa424;
+    }
+
+    .btn:hover {
+        box-shadow: 0 4px #efa424;
+        top: 2px;
+    }
+
+    .btn:active {
+        box-shadow: 0 0 #efa424;
+        top: 6px;
+    }
+
+    /*    Boutton    */
+
+
+/*  -------------  Footer  -------------  */
+
+
+
+/*  -------------  Responsive  -------------  */
+
+
+ @media (max-width: 990px) {
+    header {
+        background: none;
+    }
+
+    #navMenus .links,
+    #navMenus .ActionButton,
+    #navMenus .Connexion {
+        display: none;
+    }
+
+    .menuBurger {
+        display: block;
+    }
 }
 
-.btn:hover {
-    box-shadow: 0 4px #efa424;
-    top: 2px;
-}
 
-.btn:active {
-    box-shadow: 0 0 #efa424;
-    top: 6px;
-}
-
-/*Footer*/
+/*  -------------  Responsive  -------------  */

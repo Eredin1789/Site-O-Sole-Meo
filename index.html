@@ -4,94 +4,49 @@
  
 <head>
 	<link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 	<meta charset="utf-8">
 	<title>O' Sole Meo</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale:1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body> 
     <header>
-        <nav id="navbandeau">
-            <div id="divlogo"> 
-                <img src="./Images/LogoSoleMeo.jpg" alt="LogoSoleMeo" id="LogoSoleMeo">
+        <div id="divlogo"> 
+            <img src="./Images/LogoSoleMeo.jpg" alt="LogoSoleMeo" id="LogoSoleMeo">
+        </div>
+        <div id="divTitre">
+            <h1 id="Titre" href="#" class="logo">O' Sole Meo</h1>
+        </div>
+        <nav id="navMenus">
+            <ul class="links">
+                <li class="LiMenuSelection"><a href="">Commander en ligne</a></li>
+                <li class="LiMenuSelection"><a href="">Voir la carte</a></li>
+                <li class="LiMenuSelection"><a href="">Nous contacter</a></li>
+            </ul>
+            <div class="buttons">
+                <a href="" class="Connexion">Se connecter</a>
+                <a href="" class="ActionButton">S'inscrire</a>
             </div>
-            <div id="divTitre">
-                <h1 id="Titre" href="#" class="logo">O' Sole Meo</h1>
+            <div class="menuBurger">
+                <i class="fa-solid fa-bars"></i>
             </div>
-            <nav id="navbouttonBurger">
-                <div id="divdessusbouttonburger">         
-                    <img id="bouttonBurger" src="Images/burger.png" alt="bouttonBurger">
-                    <div class="divsousmenuburger">                    
-                        <a class="Sous-menuburger" id="Sous-menuburger1" href="">&nbsp</br>Sous-menu1</br>&nbsp</a>
-                    </div>
-                    <div class="divsousmenuburger">                     
-                        <a class="Sous-menuburger" id="Sous-menuburger2" href="">&nbsp</br>Sous-menu1</br>&nbsp</a>                 
-                    </div>
-                    <div class="divsousmenuburger">            
-                        <a class="Sous-menuburger" id="Sous-menuburger3" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    <div class="divsousmenuburger">                    
-                        <a class="Sous-menuburger" id="Sous-menuburger4" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    <div class="divsousmenuburger">                    
-                        <a class="Sous-menuburger" id="Sous-menuburger5" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
+        </nav>
+        <div class="menuBurger">
+            <ul class="links">
+                <li class="LiMenuSelection"><a href="">Commander en ligne</a></li>
+                <li class="LiMenuSelection"><a href="">Voir la carte</a></li>
+                <li class="LiMenuSelection"><a href="">Nous contacter</a></li>
+                <div class="divider"></div>
+                <div class="buttons-Burger">
+                    <a href="" class="Connexion">Se connecter</a>
+                    <a href="" class="ActionButton">S'inscrire</a>
                 </div>
-            </nav>
-
-            <nav id="navmenuselection">
-                <div class="DivBoutonsPrincipaux">
-                    <a href="#Commander-en-ligne">&nbsp</br>&nbsp</br>Commander en ligne</br>&nbsp</a>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu1</br>&nbsp</a>
-                    </div>
-                    <div>                     
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu1</br>&nbsp</a>                 
-                    </div>
-                    <div>            
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    
-                </div>
-                <div class="DivBoutonsPrincipaux">
-                    <a href="#Voir-la-carte">&nbsp</br>&nbsp</br>Voir la carte</br>&nbsp</a>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                </div>
-                <div class="DivBoutonsPrincipaux">
-                    <a href="#">&nbsp</br>&nbsp</br>Nous contacter</section></br>&nbsp</a>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                    <div>                    
-                        <a class="Sous-menu1" href="">&nbsp</br>Sous-menu3</br>&nbsp</a>
-                    </div>
-                </div>
-            </nav>
-    </nav>
-
+            </ul>
+        </div>
     </header>
 
     <main>
