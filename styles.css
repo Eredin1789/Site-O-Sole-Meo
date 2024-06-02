@@ -87,30 +87,6 @@ header {
 
     /*    Logo en haut à droite    */
 
-    /*    Titre bandeau    */
-
-    #divTitre {
-        height: 100%;
-        min-width: 200px;
-    }
-
-    #Titre {
-        height: 70%;
-        width: 100%;
-        color: rgb(0, 0, 0);
-        text-align: center;
-        max-width: 100%;
-        max-height: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis; 
-        margin-top: 30px;   
-        font-size: 30px; 
-        font-size: 200%;
-        font-weight: bold;
-    }
-
-    /*    Titre bandeau    */
-
 
     /*    Menu de selection    */
 
@@ -120,27 +96,28 @@ header {
     
     #navMenus {
         width: 100%;
-        max-width: 1200px;
+        max-width: 800px;
         height: 100px;
         margin: 0 auto;
-        border: solid 2px red;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-right: 0px;
+        text-align: center;
     }
 
     #navMenus .links {
         display: flex;
         gap: 2rem;
     }
-
-    #navMenus .menuBurger {
-        color: black;
-        font-size: 1.5rem;
-        cursor: pointer;
-        display: none;
-    }
     
+    .dividerBandeau {
+        width: 1px;
+        background-color: white;
+        height: 80%;
+        margin: auto;
+    }
+
     .ActionButton {
         border: solid 1px rgb(230, 215, 9);
         background-color: rgb(230, 215, 9);
@@ -148,7 +125,7 @@ header {
         border-radius: 5px;
         outline: none;
         font-size: 0.9rem;
-        color: black;
+        color: rgb(0, 0, 0);
     }
 
     .ActionButton:hover {
@@ -173,17 +150,31 @@ header {
 
         /*    Menu burger    */
 
-        .menuBurger {
+        #navMenus .menuBurgerIcone {
             display: none;
             position: absolute;
-            right: 2rem;
-            top: 60px;
-            width: 200px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .menuBurger {
+            height: 0;
+            position: absolute;
+            backdrop-filter: blur(3px);
             background: rgba(0,0,0,0.2);
             border-radius: 10px;
-            backdrop-filter: blur(3px);
+            top: 60px;
+            right: 2rem;
+            width: 200px;
+            transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden;
-        }   
+            margin-top: 20px;
+        }
+
+        .menuBurger.open {
+            height: auto;   
+        }
 
         .buttons-Burger {
             display: flex;
@@ -260,7 +251,7 @@ main {
 
     #bandeau1 {
         margin: 0px;
-        height: 200%;
+        height: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -444,7 +435,7 @@ footer {
 /*  -------------  Responsive  -------------  */
 
 
- @media (max-width: 990px) {
+@media (max-width: 990px) {
     header {
         background: none;
     }
@@ -458,7 +449,46 @@ footer {
     .menuBurger {
         display: block;
     }
+
+    #navMenus .menuBurgerIcone {
+        display: block;
+        top: 34px;
+        right: 10px;
+        margin-right: 10px;
+    }
 }
 
+@media (max-width: 576px) {
+    .menuBurger {
+        left: 2rem;
+        width: unset;
+    }
+}
+
+@media (width <= 990px) {
+
+    #navMenus {
+        width: auto;
+    }
+}
+
+@media (width > 990px) {
+
+    .menuBurger {
+        display: none;    
+    }
+
+    .Connexion {
+        color: rgb(255, 255, 255);
+    }
+
+    .LiMenuSelection a{
+        color: white;
+    }
+
+    .LiMenuSelection a:hover{
+        color : orange;
+    }
+}
 
 /*  -------------  Responsive  -------------  */

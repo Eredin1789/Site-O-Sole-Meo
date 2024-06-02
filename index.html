@@ -18,23 +18,20 @@
         <div id="divlogo"> 
             <img src="./Images/LogoSoleMeo.jpg" alt="LogoSoleMeo" id="LogoSoleMeo">
         </div>
-        <div id="divTitre">
-            <h1 id="Titre" href="#" class="logo">O' Sole Meo</h1>
-        </div>
         <nav id="navMenus">
             <ul class="links">
                 <li class="LiMenuSelection"><a href="">Commander en ligne</a></li>
                 <li class="LiMenuSelection"><a href="">Voir la carte</a></li>
                 <li class="LiMenuSelection"><a href="">Nous contacter</a></li>
             </ul>
+            <div class="dividerBandeau"></div>
             <div class="buttons">
                 <a href="" class="Connexion">Se connecter</a>
                 <a href="" class="ActionButton">S'inscrire</a>
             </div>
-            <div class="menuBurger">
+            <div class="menuBurgerIcone">
                 <i class="fa-solid fa-bars"></i>
             </div>
-            
         </nav>
         <div class="menuBurger">
             <ul class="links">
@@ -49,6 +46,17 @@
             </ul>
         </div>
     </header>
+        <script>
+            const menuBurgerIcone = document.querySelector('.menuBurgerIcone')
+            const menuBurgerImage = document.querySelector('.menuBurgerIcone  i')
+            const menuBurger = document.querySelector('.menuBurger')
+        
+            menuBurgerIcone.onclick = function() {
+                menuBurger.classList.toggle('open')
+                const isOpen = menuBurger.classList.contains('open')
+                menuBurgerImage.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
+            }
+        </script>
 
     <main>
         <div id="bandeau1">
