@@ -158,6 +158,14 @@ header {
             overflow: hidden;
         }
 
+        .menuBurgerIcone i {
+            font-size: 2em;
+        }
+        
+        .menuBurgerIcone i:hover {
+            color: yellow;
+        }
+
         .menuBurger {
             height: 0;
             position: absolute;
@@ -458,7 +466,7 @@ footer {
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 650px) {
     .menuBurger {
         left: 2rem;
         width: unset;
