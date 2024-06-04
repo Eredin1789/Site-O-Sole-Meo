@@ -319,15 +319,11 @@ main {
     /*    Bandeau N°3    */
 
     #bandeau3 {
-        background: url(Images/FondSite.jpg) fixed 100%;
-        background-repeat: no-repeat;
-        background-size: cover;
         margin: 0px;
         color: rgb(255, 255, 255);
         display: flex;
         flex-direction: row-reverse;
         min-height: 800px;
-
     }
 
     #divTextBandeau3 {
@@ -529,6 +525,10 @@ footer {
     #navMenus {
         width: auto;
     }
+
+    .dividerBandeau { 
+        display: none;
+    }
 }
 
 @media (width > 990px) {
@@ -550,4 +550,18 @@ footer {
     }
 }
 
+@media (width < 170px) {  /*    Gestion de l'apparition du menu burger    */
+    
+    .menuBurger,
+    .menuBurgerIcone,
+    .menuBurgerIcone i,
+    #navMenus {
+        display: none;
+    }
+
+    #divlogo {
+        margin: auto 15% auto 15%;
+        width: 100%;
+    }
+}
 /*  -------------  Responsive  -------------  */
