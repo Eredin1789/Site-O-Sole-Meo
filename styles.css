@@ -61,6 +61,7 @@ header {
     display: block;
     color: white;
     display: flex;
+    align-items: center;
     flex-direction: row;
     justify-content: space-between;
     background: rgba(0,0,0,0.2);
@@ -74,7 +75,10 @@ header {
         display: flex;
         align-items: center;
         width: 80px;
-        height: 80px;
+        min-width: 7%;
+        min-width: 80px;
+        max-height: 90px;
+        height: 80%;
     }
 
     #LogoSoleMeo {
@@ -94,13 +98,15 @@ header {
     #navMenus {
         width: 100%;
         max-width: 800px;
-        height: 100px;
+        height: 100%;
         margin: 0 auto;
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-right: 0px;
+        justify-content: right;
         text-align: center;
+        margin-right: 10px;
+        min-width: 70%;
+        gap: 3rem;
     }
 
     #navMenus .links {
@@ -111,8 +117,7 @@ header {
     .dividerBandeau {
         width: 1px;
         background-color: white;
-        height: 80%;
-        margin: auto;
+        height: 80px;
     }
 
     .ActionButton {
@@ -138,6 +143,7 @@ header {
         border-radius: 5px;
         outline: none;
         font-size: 0.9rem;
+        margin-right: 5px;
     }
 
     .Connexion:hover {
@@ -241,8 +247,60 @@ main {
     height: 80%;
 }
 
+.BandeauxMain {
+    display: flex;
+    min-height: 800px;
+    margin: 0px;
+}   
+
+@media (width < 551px) {
+    .bandeau2,
+    .bandeau3,
+    .bandeau4  {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .BandeauxMain div p {
+        text-align: center;
+    }
+
+    .BandeauxMain div {
+        margin: 10px;
+    }
+}
+
+@media (width > 550px) {
+    .bandeau3 {
+        flex-direction: row-reverse;
+
+    }
+
+    .bandeau2,
+    .bandeau4  {
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: row;
+    }
+
+    #divimgBandeau2,
+    #divimgBandeau4 {
+        width: 30%;
+    }
+
+    #divTextBandeau2,
+    #divTextBandeau4 {
+        width: 60%;
+    }
+}
 
     /*    Bandeau N°1    */
+
+    .bandeau1 {
+        align-items: center;
+        justify-content: center;
+    }
 
     .messageCentre {
         margin-top: 100px;
@@ -254,63 +312,37 @@ main {
         max-height: 80%;
     }
 
-    #bandeau1 {
-        margin: 0px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 800px;
-
-    }
-
     /*    Bandeau N°1    */
 
 
     /*    Bandeau N°2    */
 
-    #bandeau2 {
-        margin: 0px;
+    .bandeau2 {
         background-color: rgb(255, 255, 0);
         color: rgb(0, 0, 0);
-        display: flex;
-        flex-direction: row;
-        min-height: 800px;
-
-    }
+    }    
 
     #divTextBandeau2 {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 2%;
-        margin-bottom: 2%;
-        margin-left: auto;
-        margin-right: auto;
-        width: 60%;
+        text-align: center;   
+        justify-content: center;    
         overflow: hidden;
     }
 
     #textBandeau2 {
-        width: 70%;
         font-size: 100%;
-        max-height: 70%;
         overflow: hidden;
     }
 
     #divimgBandeau2 {
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-top: 2%;
-        margin-bottom: 2%;
-        margin-left: auto;
-        margin-right: auto;
-        width: 35%;
+        text-align: center;
     }
 
     #imgBandeau2 {
-        width: 30%;
-        height: 30%;
+        width: 100%;
+        height: 100%;
     }
 
     /*    Bandeau N°2    */
@@ -318,12 +350,8 @@ main {
 
     /*    Bandeau N°3    */
 
-    #bandeau3 {
-        margin: 0px;
+    .bandeau3 {
         color: rgb(255, 255, 255);
-        display: flex;
-        flex-direction: row-reverse;
-        min-height: 800px;
     }
 
     #divTextBandeau3 {
@@ -357,56 +385,41 @@ main {
     }
 
     #imgBandeau3 {
-        width: 30%;
-        height: 30%;
+        width: 100%;
+        height: 100%;
     }
 
     /*    Bandeau N°3    */
 
     /*    Bandeau N°4    */
 
-     #bandeau4 {
-        margin: 0px;
+    .bandeau4 {
         background-color: rgb(255, 255, 0);
         color: rgb(0, 0, 0);
-        display: flex;
-        flex-direction: row;
-        min-height: 800px;
     }
 
     #divTextBandeau4 {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 2%;
-        margin-bottom: 2%;
-        margin-left: auto;
-        margin-right: auto;
-        width: 60%;
+        text-align: center;   
+        justify-content: center;    
         overflow: hidden;
     }
 
     #textBandeau4 {
-        width: 70%;
         font-size: 100%;
-        max-height: 70%;
         overflow: hidden;
     }
 
-    #divimgBandeau4 {
+    #divimgBandeau2 {
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-top: 2%;
-        margin-bottom: 2%;
-        margin-left: auto;
-        margin-right: auto;
-        width: 35%;
+        text-align: center;
     }
 
+
     #imgBandeau4 {
-        width: 30%;
-        height: 30%;
+        width: 100%;
+        height: 100%;
     }
 
     /*    Bandeau N°4    */
@@ -431,22 +444,13 @@ footer {
 
     .ImgReseaux {
         position : fixed;
-        bottom : 10px;
-        right : 10px;
-        float : right;
+        bottom : 20%;
+        left : 10px;
         display : flex;
         flex-direction : column;
-        max-width: 20px;
-        min-width: 10px;
-        width: 20px;
-    }
-
-    #imggmail {
-        border : solid 2px transparent;
-    }
-
-    #imglinkedin {
-        border : solid 2px transparent;
+        width: 50px;
+        min-width: 4%;
+        gap: 10px;
     }
 
     /*    Images réseaux    */
@@ -511,9 +515,13 @@ footer {
         right: 10px;
         margin-right: 10px;
     }
+
+    .Connexion {
+        margin-right: 0px;
+    }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 550px) {
     .menuBurger {
         left: 2rem;
         width: unset;
@@ -550,7 +558,7 @@ footer {
     }
 }
 
-@media (width < 170px) {  /*    Gestion de l'apparition du menu burger    */
+@media (width < 175px) {  /*    Gestion de l'apparition du menu burger    */
     
     .menuBurger,
     .menuBurgerIcone,
@@ -564,4 +572,20 @@ footer {
         width: 100%;
     }
 }
+
+@media (width < 85px) {  /*    Gestion de l'affichage logo    */
+    
+    #divlogo {
+        display: none;
+    }
+}
+
+@media (height < 255px) {  /*    Gestion de l'affichage des réseaux    */
+    
+    .ImgReseaux {
+        display: none;
+    }
+}
+
+
 /*  -------------  Responsive  -------------  */
