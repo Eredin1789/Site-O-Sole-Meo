@@ -263,6 +263,7 @@ main {
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: red;
     }
 
     /*    Bandeau N°1    */
