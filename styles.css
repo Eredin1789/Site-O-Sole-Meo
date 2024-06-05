@@ -4,7 +4,6 @@
 
 /*  -------------  Body  -------------  */
 
-
 body {
     position: absolute;
     width : 100%;
@@ -42,6 +41,27 @@ a:hover {
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
 
+@keyframes reveal {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transition: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slide {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
 
 /*  -------------  Body  -------------  */
 
@@ -178,11 +198,7 @@ header {
 
         .menuBurgerIcone i {
             font-size: 2em;
-        }
-        
-        .menuBurgerIcone i:hover {
-            color: yellow;
-        }
+        }     
 
         .menuBurger {
             height: 0;
@@ -252,6 +268,7 @@ header {
 /*  -------------  Main  -------------  */
 
 
+
 main {
     background: url(Images/FondSite.jpg) fixed 100%;
     background-repeat: no-repeat;
@@ -291,7 +308,22 @@ main {
         width: 100%;
         height: 100%;
         margin: 0;
+        animation: reveal linear;
+        animation-timeline: view();
+        animation-range-start: cover 0%;
+        animation-range-end: contain 50%;
+
     }
+
+    #textBandeau2,
+    #textBandeau3,
+    #textBandeau4 {
+        animation: slide linear;
+        animation-timeline: view();
+        animation-range-start: cover 0%;
+        animation-range-end: cover 30%;
+    }
+    
 
     @media (width < 551px) {
 
@@ -364,13 +396,11 @@ main {
         .bandeau1 {
             display: flex;
             margin: 0;
-            min-height: 700px;
         }
 
         #messageCentre {
             margin-top: 100px;
             width: 80%;
-            overflow: hidden;
         }
 
         #messageCentre p {
@@ -388,14 +418,14 @@ main {
 
 /*  -------------  Footer  -------------  */
 
-
 footer {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: space-around;
-    margin-top: 0px;
+    margin: 0;
     background-color: rgb(101, 81, 81);
+    min-height: none;
 }
 
     /*    Images réseaux    */
@@ -416,7 +446,7 @@ footer {
 
     /*    Boutton    */
 
-    .btn{
+    .btn {
         height: 100px;
         display: block;
         font-size: 30px;
@@ -451,6 +481,50 @@ footer {
 
 /*  -------------  Responsive  -------------  */
 
+@media (width > 990px) {
+    body {
+        height: 500%;
+
+    }
+
+    main { 
+        min-height: 80%;
+        max-height: 80%;
+    }
+
+    .bandeau1,
+    .bandeau2,
+    .bandeau3,
+    .bandeau4 {
+        min-height: 25%;
+        max-height: 25%;
+    }
+
+    footer {
+        min-height: 21%;
+
+    }
+
+        /*   Navbar   */
+
+        .menuBurger {
+            display: none;    
+        }
+
+        .Connexion {
+            color: rgb(255, 255, 255);
+        }
+
+        .LiMenuSelection a{
+            color: white;
+        }
+
+        .LiMenuSelection a:hover{
+            color : orange;
+        }
+        
+        /*   Navbar   */
+}
 
 @media (max-width: 990px) {
     header {
@@ -479,6 +553,30 @@ footer {
     }
 }
 
+@media (width < 991px) {
+
+    #navMenus {
+        width: auto;
+    }
+
+    .dividerBandeau { 
+        display: none;
+    }
+
+    .bandeau1 {
+        padding-bottom: 200px ;
+        margin-top: 100px ;
+    }
+
+}
+
+@media (min-width: 550px) {
+
+     .menuBurgerIcone i:hover {
+            color: yellow;
+        }
+    }
+
 @media (max-width: 550px) {
     .menuBurger {
         left: 2rem;
@@ -490,33 +588,10 @@ footer {
     }
 }
 
-@media (width <= 990px) {
-
-    #navMenus {
-        width: auto;
-    }
-
-    .dividerBandeau { 
+@media (height < 255px) {  /*    Gestion de l'affichage des réseaux    */
+    
+    .ImgReseaux {
         display: none;
-    }
-}
-
-@media (width > 990px) {
-
-    .menuBurger {
-        display: none;    
-    }
-
-    .Connexion {
-        color: rgb(255, 255, 255);
-    }
-
-    .LiMenuSelection a{
-        color: white;
-    }
-
-    .LiMenuSelection a:hover{
-        color : orange;
     }
 }
 
@@ -541,13 +616,5 @@ footer {
         display: none;
     }
 }
-
-@media (height < 255px) {  /*    Gestion de l'affichage des réseaux    */
-    
-    .ImgReseaux {
-        display: none;
-    }
-}
-
 
 /*  -------------  Responsive  -------------  */
