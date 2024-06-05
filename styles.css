@@ -20,7 +20,7 @@ body {
     font-style: normal;
 }
 
-#Debut {
+#RetourDebut {
     height: 0px;
     margin-top: 0px;
     visibility: hidden;
@@ -151,6 +151,21 @@ header {
         color: rgb(255, 255, 255);
     }
 
+    
+    #RetourBandeau3 {
+        margin-top: 5px;
+        height: 0;
+        visibility: hidden;
+        overflow: hidden;
+    }
+
+    #RetourBandeau2,
+    #RetourBandeau4 {
+        height: 0px;
+        visibility: hidden;
+        overflow: hidden;
+    }
+
         /*    Menu burger    */
 
         #navMenus .menuBurgerIcone {
@@ -252,11 +267,12 @@ main {
     .bandeau3,
     .bandeau1 {
         color: rgb(255, 255, 255);
+        border-bottom: 5px solid rgb(255, 255, 0);
     }
 
     .BandeauxMain {
         display: flex;
-        min-height: 800px;
+        min-height: 850px;
         margin: 0px;
     }   
 
@@ -467,6 +483,10 @@ footer {
     .menuBurger {
         left: 2rem;
         width: unset;
+    }
+
+    .ImgReseaux {
+        display: none;
     }
 }
 
