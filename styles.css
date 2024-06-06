@@ -244,6 +244,14 @@ header {
 
         /*    Menu burger    */
 
+        .links a {
+            color: white;
+        }
+
+        .links li a:hover {
+            color : orange;
+        }
+
         #navMenus .menuBurgerIcone {
             display: none;
             position: absolute;
@@ -488,12 +496,52 @@ footer {
     .Contacts {
         position : fixed;
         bottom : 20%;
-        left : 10px;
+        left : 0px;
         display : flex;
         flex-direction : column;
         width: 50px;
         min-width: 3%;
-        gap: 10px;
+        max-width: 5%;
+        overflow: hidden;
+        border-radius: 50px;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .Contacts img {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        z-index: 1;
+    }
+
+    .Contacts img:hover {
+        margin-bottom: 10px;
+        margin-top: 0px;
+        opacity: 50%;
+    }
+
+    .Contacts img:active {
+        opacity: 100%;
+    }
+    .Contacts::before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        transform: translate(-40%, -50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgb(255, 255, 0);
+        transition: width 1.5s, height 1.5s;
+        z-index: 0;
+        right: -160px;
+
+    }
+    .Contacts:hover::before {
+        width: 500px;
+        height: 500px;
     }
 
     /*    Contacts    */
@@ -557,7 +605,6 @@ footer {
 
     footer {
         min-height: 21%;
-
     }
 
         /*   Navbar   */
