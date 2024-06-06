@@ -117,7 +117,6 @@ header {
     
     #navMenus {
         width: 100%;
-        max-width: 800px;
         height: 100%;
         margin: 0 auto;
         display: flex;
@@ -129,49 +128,6 @@ header {
         gap: 3rem;
     }
 
-    #navMenus .links {
-        display: flex;
-        gap: 2rem;
-    }
-    
-    .dividerBandeau {
-        width: 1px;
-        background-color: white;
-        height: 80px;
-    }
-
-    .ActionButton {
-        border: solid 1px rgb(230, 215, 9);
-        background-color: rgb(230, 215, 9);
-        padding: 0.5rem 1.2rem;
-        border-radius: 5px;
-        outline: none;
-        font-size: 0.9rem;
-        color: rgb(0, 0, 0);
-    }
-
-    .ActionButton:hover {
-        border: 1px solid white;
-        color: white;
-    }
-
-    .Connexion {
-        background-color: transparent;
-        color: rgb(0, 0, 0);
-        border: 1px solid rgb(135, 176, 212);
-        padding: 0.5rem 1.2rem;
-        border-radius: 5px;
-        outline: none;
-        font-size: 0.9rem;
-        margin-right: 5px;
-    }
-
-    .Connexion:hover {
-        background-color: rgb(135, 176, 212);
-        color: rgb(255, 255, 255);
-    }
-
-    
     #RetourBandeau3 {
         margin-top: 5px;
         height: 0;
@@ -185,6 +141,106 @@ header {
         visibility: hidden;
         overflow: hidden;
     }
+
+    #navMenus .links {
+        display: flex;
+        gap: 2rem;
+    }
+    
+    .dividerBandeau {
+        width: 1px;
+        background-color: white;
+        height: 80px;
+    }
+
+        /*   Boutton inscription    */
+
+
+        .ActionButton {
+            display: inline-flex;
+            position: relative;
+            border: solid 1px rgb(230, 215, 9);
+            padding: 0.5rem 1.2rem;
+            border-radius: 5px;
+            outline: none;
+            font-size: 0.9rem;
+            color: rgb(255, 255, 255);
+            display: inline-flex;
+            letter-spacing: 1px;    
+            overflow: hidden;   
+
+        }
+        .ActionButton span{
+            position: relative;
+            z-index: 1;
+        }
+        .ActionButton:hover {
+            color: white;
+        }
+        .ActionButton::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            transform: translate(-40%, -50%);
+            width: 0px;
+            height: 0px;
+            border-radius: 50%;
+            background: rgb(230, 215, 9);
+            transition: width 1.5s, height 1.5s;
+            z-index: 0;
+            right: -160px;
+
+        }
+        .ActionButton:hover::before {
+            width: 370px;
+            height: 200px;
+        }
+
+        /*   Boutton inscription    */
+
+
+        /*   Boutton connexion    */
+
+        .Connexion {
+            border: 1px solid rgb(135, 176, 212);
+            position: relative;
+            margin-right: 5px;
+            font-size: 0.9rem;
+            outline: none;
+            padding: 0.5rem 1.2rem;
+            display: inline-flex;
+            background-color: transparent;
+            border-radius: 5px;
+            letter-spacing: 1px; 
+            overflow: hidden;  
+        }
+        .Connexion:hover {
+            color: rgb(255, 255, 255);
+        }
+        .Connexion span{
+            position: relative;
+            z-index: 1;
+        }
+        .Connexion::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            transform: translate(-40%, -50%);
+            width: 0px;
+            height: 0px;
+            border-radius: 50%;
+            background: rgb(135, 176, 212);
+            transition: width 1.5s, height 1.5s;
+            z-index: 0;
+            right: -160px;
+
+        }
+        .Connexion:hover::before {
+            width: 370px;
+            height: 200px;
+        }
+
+        /*   Boutton connexion    */
 
         /*    Menu burger    */
 
@@ -251,7 +307,6 @@ header {
         .menuBurger .ActionButton,
         .menuBurger .Connexion {
             width: 80%;
-            display: flex;
             align-items: center;
             justify-content: center;
         }
@@ -428,9 +483,9 @@ footer {
     min-height: none;
 }
 
-    /*    Images réseaux    */
+    /*    Contacts   */
 
-    .ImgReseaux {
+    .Contacts {
         position : fixed;
         bottom : 20%;
         left : 10px;
@@ -441,7 +496,7 @@ footer {
         gap: 10px;
     }
 
-    /*    Images réseaux    */
+    /*    Contacts    */
 
 
     /*    Boutton    */
@@ -583,14 +638,14 @@ footer {
         width: unset;
     }
 
-    .ImgReseaux {
+    .Contacts {
         display: none;
     }
 }
 
 @media (height < 255px) {  /*    Gestion de l'affichage des réseaux    */
     
-    .ImgReseaux {
+    .Contacts {
         display: none;
     }
 }
@@ -603,7 +658,7 @@ footer {
     #navMenus {
         display: none;
     }
-
+    imglinkedin
     #divlogo {
         margin: auto 15% auto 15%;
         width: 100%;
