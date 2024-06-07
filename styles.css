@@ -246,10 +246,16 @@ header {
 
         .links a {
             color: white;
+            overflow: hidden;
+            padding: 5px;
+            width: 100%;
+            z-index: 1;
         }
+        
 
         .links li a:hover {
             color : orange;
+            opacity: 75%;
         }
 
         #navMenus .menuBurgerIcone {
@@ -500,24 +506,24 @@ footer {
         display : flex;
         flex-direction : column;
         width: 50px;
-        min-width: 3%;
         max-width: 5%;
         overflow: hidden;
-        border-radius: 50px;
-        padding-left: 10px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        border: solid 1px rgb(135, 176, 212);
+        padding: 1%;
+        border-start-end-radius: 20px;
+        border-end-end-radius: 20px;
+
     }
 
     .Contacts img {
-        margin-top: 5px;
-        margin-bottom: 5px;
+        margin-top: 5%;
+        margin-bottom: 5%;
         z-index: 1;
     }
 
     .Contacts img:hover {
-        margin-bottom: 10px;
-        margin-top: 0px;
+        margin-bottom: 10%;
+        margin-top: 0;
         opacity: 50%;
     }
 
@@ -530,18 +536,18 @@ footer {
         top: 0px;
         left: 0px;
         transform: translate(-40%, -50%);
-        width: 10px;
-        height: 10px;
+        width: 0px;
+        height: 0px;
         border-radius: 50%;
-        background: rgb(255, 255, 0);
-        transition: width 1.5s, height 1.5s;
+        background: rgb(135, 176, 212);;
+        transition: width 2.5s, height 2.5s;
         z-index: 0;
         right: -160px;
 
     }
     .Contacts:hover::before {
-        width: 500px;
-        height: 500px;
+        width: 900%;
+        height: 300%;
     }
 
     /*    Contacts    */
@@ -684,13 +690,9 @@ footer {
         left: 2rem;
         width: unset;
     }
-
-    .Contacts {
-        display: none;
-    }
 }
 
-@media (height < 255px) {  /*    Gestion de l'affichage des réseaux    */
+@media (height < 300px) {  /*    Gestion de l'affichage des réseaux    */
     
     .Contacts {
         display: none;
@@ -705,7 +707,9 @@ footer {
     #navMenus {
         display: none;
     }
-    imglinkedin
+    .Contacts {
+        display: none;
+    }
     #divlogo {
         margin: auto 15% auto 15%;
         width: 100%;
