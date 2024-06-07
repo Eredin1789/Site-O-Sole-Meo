@@ -129,7 +129,7 @@ header {
     }
 
     #RetourBandeau3 {
-        margin-top: 5px;
+        margin-top: 0px;
         height: 0;
         visibility: hidden;
         overflow: hidden;
@@ -328,7 +328,7 @@ header {
         /*    Menu burger    */
 
     /*    Menu de selection    */
-
+    
 
 /*  -------------  Headder  -------------  */
 
@@ -350,10 +350,56 @@ main {
 
     /*    Bandeaux    */
 
-    .bandeau3,
+    .bandeau3 {
+        background: url(Images/Pates1.jpeg) fixed 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        
+    }
+
+    /*.bandeau3,
     .bandeau1 {
         color: rgb(255, 255, 255);
-        border-bottom: 5px solid rgb(255, 255, 0);
+        border-bottom: 5px solid white;
+    }*/
+
+    @media (width > 990px) {
+
+        .bandeau1::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0.4%;
+            top: 20%;
+            background: linear-gradient(.25turn, yellow, 40%, white);
+        }
+
+        .bandeau2::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0.3%;
+            top: 40%;
+            background: linear-gradient(.25turn, yellow, 40%, white);
+        }
+
+        .bandeau3::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0.3%;
+            top: 60%;
+            background: linear-gradient(.25turn, yellow, 40%, white);
+        }
+
+        .bandeau4::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0.3%;
+            top: 80%;
+            background: linear-gradient(.25turn, rgb(101, 81, 81), 60%, yellow);
+        }
     }
 
     .BandeauxMain {
