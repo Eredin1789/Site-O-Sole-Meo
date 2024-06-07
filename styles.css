@@ -509,20 +509,20 @@ footer {
         max-width: 5%;
         overflow: hidden;
         border: solid 1px rgb(135, 176, 212);
-        padding: 1%;
-        border-start-end-radius: 20px;
-        border-end-end-radius: 20px;
-
+        padding: 2%;
+        border-start-end-radius: 15px;
+        border-end-end-radius: 15px;
     }
 
     .Contacts img {
-        margin-top: 5%;
-        margin-bottom: 5%;
+        margin-top: 8%;
+        margin-bottom: 8%;
         z-index: 1;
+        cursor: pointer;
     }
 
     .Contacts img:hover {
-        margin-bottom: 10%;
+        margin-bottom: 16%;
         margin-top: 0;
         opacity: 50%;
     }
@@ -675,7 +675,6 @@ footer {
         padding-bottom: 200px ;
         margin-top: 100px ;
     }
-
 }
 
 @media (min-width: 550px) {
@@ -710,17 +709,14 @@ footer {
     .Contacts {
         display: none;
     }
+}
+
+@media (width < 100px) {  /*    Gestion de l'affichage logo    */
+    
     #divlogo {
-        margin: auto 15% auto 15%;
-        width: 100%;
+        margin: auto;
     }
 }
 
-@media (width < 85px) {  /*    Gestion de l'affichage logo    */
-    
-    #divlogo {
-        display: none;
-    }
-}
 
 /*  -------------  Responsive  -------------  */
