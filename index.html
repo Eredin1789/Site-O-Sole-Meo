@@ -22,12 +22,12 @@
             <ul class="links">
                 <li class="LiMenuSelection"><a href="Carte.html" class="Lien1Menu">Voir la carte</a></li>
                 <li class="LiMenuSelection"><a href="#RetourBandeau2" class="Lien2Menu">Commander en ligne</a></li>
-                <li class="LiMenuSelection"><a href="#RetourBandeau4">Nous contacter</a></li>
+                <li class="LiMenuSelection"><a href="#RetourFooter">Nous contacter</a></li>
             </ul>
             <div class="dividerBandeau"></div>
             <div class="buttons">
-                <a href="" class="Connexion"><span>Se connecter</span></a>
-                <a href="" class="ActionButton"><span>S'inscrire</span></a>
+                <a href="#RetourBandeau3" class="Connexion"><span>Se connecter</span></a>
+                <a href="#RetourBandeau4" class="ActionButton"><span>S'inscrire</span></a>
             </div>
             <div class="menuBurgerIcone">
                 <i class="fa-solid fa-bars"></i>
@@ -37,11 +37,11 @@
             <ul class="links">
                 <li class="LiMenuSelection"><a href="Carte.html" class="Lien1Menu">Voir la carte</a></li>
                 <li class="LiMenuSelection"><a href="#RetourBandeau2" class="Lien2Menu">Commander en ligne</a></li>
-                <li class="LiMenuSelection"><a href="#RetourBandeau4" class="Lien3Menu">Nous contacter</a></li>
+                <li class="LiMenuSelection"><a href="#RetourFooter" class="Lien3Menu">Nous contacter</a></li>
                 <div class="divider"></div>
                 <div class="buttons-Burger">
-                    <a href="" class="Connexion"><span>Se connecter</span></a>
-                    <a href="" class="ActionButton"><span>S'inscrire</span></a>
+                    <a href="#RetourBandeau3" class="Connexion"><span>Se connecter</span></a>
+                    <a href="#RetourBandeau4" class="ActionButton"><span>S'inscrire</span></a>
                 </div>
             </ul>
         </div>
@@ -104,8 +104,27 @@
                 </p>
             </div>
         </div>
+        <script>
+            window.addEventListener('scroll', function() {
+                let bandeaux = document.querySelectorAll('.BandeauxMain');
+                let screenHeight = window.innerHeight;
+        
+                bandeaux.forEach(function(bandeau) {
+                    let positionTop = bandeau.getBoundingClientRect().top;
+                    let positionBottom = bandeau.getBoundingClientRect().bottom;
+        
+                    // Ajouter la classe si l'élément est visible
+                    if(positionTop < screenHeight && positionBottom > 0) {
+                        bandeau.classList.add('appear');
+                    } else {
+                        // Retirer la classe si l'élément quitte l'écran
+                        bandeau.classList.remove('appear');
+                    }
+                });
+            });
+        </script>
     </main>
-
+    <span id="RetourFooter"></span>
     <footer>
         <button class="btn" type="button">Nous-contacter</button>
 

@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-
+html {
+    scroll-behavior: smooth;
+}
 
 /*  -------------  Body  -------------  */
 
@@ -128,7 +130,8 @@ header {
         gap: 3rem;
     }
 
-    #RetourBandeau3 {
+    #RetourBandeau3,
+    #RetourFooter {
         margin-top: 0px;
         height: 0;
         visibility: hidden;
@@ -339,9 +342,7 @@ header {
 
 
 main {
-    background: url(Images/FondSite.jpg) fixed 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: rgba(255, 255, 255, 1);
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -350,20 +351,33 @@ main {
 
     /*    Bandeaux    */
 
+    @keyframes TransitionBandeaux {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }.BandeauxMain {
+        opacity: 0;
+    }.appear {
+        opacity: 1;
+        animation: TransitionBandeaux 1.5s ease-in-out;
+    }
+  
+    .bandeau1 {
+        background: url(Images/FondSite.jpg) fixed 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
     .bandeau3 {
         background: url(Images/Pates1.jpeg) fixed 100%;
         background-repeat: no-repeat;
         background-size: cover;
-        
     }
 
-    /*.bandeau3,
-    .bandeau1 {
-        color: rgb(255, 255, 255);
-        border-bottom: 5px solid white;
-    }*/
-
-    @media (width > 990px) {
+    /*@media (width > 990px) {
 
         .bandeau1::after {
             content: '';
@@ -371,16 +385,23 @@ main {
             width: 100%;
             height: 0.4%;
             top: 20%;
-            background: linear-gradient(.25turn, yellow, 40%, white);
-        }
+            background: linear-gradient(rgb(222, 222, 156) , yellow);     
+           }
 
-        .bandeau2::after {
+        .bandeau2::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0.3%;
+            top: 39.7%;
+            background: linear-gradient(yellow, rgb(222, 222, 156));     
+        }.bandeau2::after {
             content: '';
             position: absolute;
             width: 100%;
             height: 0.3%;
             top: 40%;
-            background: linear-gradient(.25turn, yellow, 40%, white);
+            background: transparent;     
         }
 
         .bandeau3::after {
@@ -389,18 +410,24 @@ main {
             width: 100%;
             height: 0.3%;
             top: 60%;
-            background: linear-gradient(.25turn, yellow, 40%, white);
+            background: linear-gradient(rgb(222, 222, 156) , yellow);     
         }
-
-        .bandeau4::after {
+        
+        .bandeau4::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0.3%;
+            top: 79.7%;
+            background: linear-gradient(yellow, rgba(99, 99, 99, 0.2));
+        }.bandeau4::after {
             content: '';
             position: absolute;
             width: 100%;
             height: 0.3%;
             top: 80%;
-            background: linear-gradient(.25turn, rgb(101, 81, 81), 60%, yellow);
-        }
-    }
+            background: transparent;        }
+    }*/
 
     .BandeauxMain {
         display: flex;
@@ -442,11 +469,10 @@ main {
 
     @media (width < 551px) {
 
-        .bandeau2,
-        .bandeau3,
-        .bandeau4  {
+        .BandeauxMain {
             flex-direction: column;
             align-items: center;
+            justify-content: space-evenly;
         }
 
         .bandeau1 {
@@ -454,19 +480,28 @@ main {
         }
 
         .BandeauxMain div p {
-            text-align: justify;
-        }
-
-        .BandeauxMain div {
-            margin-top: 30px;
-            margin-bottom: 30px;
-            width: 80%;
+            text-align: center;
+            font-size: 100%;
+            overflow: hidden;
         }
 
         .bandeau2,
         .bandeau4  {
             background-color: rgb(255, 255, 0);
             color: rgb(0, 0, 0);
+        }
+
+        #divimgBandeau2,
+        #divimgBandeau3, 
+        #divimgBandeau4 {
+            height: 20%;
+            width: auto;
+        }
+
+        #divTextBandeau2,
+        #divTextBandeau3,
+        #divTextBandeau4 {
+            width: 80%;
         }
     }
 
@@ -520,7 +555,7 @@ main {
 
         #messageCentre p {
             text-align: center;
-            font-size: 50px;   
+            font-size: 40px;   
         }
 
         /*    Bandeau N°1    */
@@ -539,7 +574,7 @@ footer {
     align-items: center;
     justify-content: space-around;
     margin: 0;
-    background-color: rgb(101, 81, 81);
+    background-color: rgb(99, 99, 99);
     min-height: none;
 }
 
@@ -636,28 +671,30 @@ footer {
 
 /*  -------------  Responsive  -------------  */
 
+body {
+    height: 500%;
+
+}
+
+main { 
+    min-height: 80%;
+    max-height: 80%;
+}
+
+.bandeau1,
+.bandeau2,
+.bandeau3,
+.bandeau4 {
+    min-height: 25%;
+    max-height: 25%;
+}
+
+footer {
+    min-height: 21%;
+}
+
 @media (width > 990px) {
-    body {
-        height: 500%;
 
-    }
-
-    main { 
-        min-height: 80%;
-        max-height: 80%;
-    }
-
-    .bandeau1,
-    .bandeau2,
-    .bandeau3,
-    .bandeau4 {
-        min-height: 25%;
-        max-height: 25%;
-    }
-
-    footer {
-        min-height: 21%;
-    }
 
         /*   Navbar   */
 
@@ -718,8 +755,7 @@ footer {
     }
 
     .bandeau1 {
-        padding-bottom: 200px ;
-        margin-top: 100px ;
+        align-items: center;
     }
 }
 
@@ -734,6 +770,16 @@ footer {
     .menuBurger {
         left: 2rem;
         width: unset;
+    }
+}
+
+@media (width < 350px) {  /*    Gestion du dépassement du texte des bandeaux   */
+    .BandeauxMain {
+        font-size: small;
+    }
+
+    #messageCentre p {
+        font-size: large;
     }
 }
 
