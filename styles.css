@@ -634,6 +634,50 @@ footer {
     /*    Contacts    */
 
 
+    /*    Carte et commandes en ligne   */
+
+    .CarteCommande {
+        position : fixed;
+        bottom : 40%;
+        right : 0px;
+        display : flex;
+        flex-direction : column;
+        width: 80px;
+        max-width: 8%;
+        overflow: hidden;
+        padding-right: 2%;
+    }
+
+    .CarteCommande img {
+        margin-top: 8%;
+        margin-bottom: 8%;
+        z-index: 1;
+        cursor: pointer;
+        overflow: visible;
+    }
+
+    .CarteCommande img:hover {
+        margin-bottom: 16%;
+        margin-top: 0;
+        opacity: 50%;
+    }
+
+    .CarteCommande img:active {
+        opacity: 100%;
+    }
+
+    .CarteCommande .ImgCarte::after {
+        background-color: red;
+        position: fixed;
+        height: 800px;
+        width: 800px;
+        top: 0;
+        right: 0;
+    }
+
+    /*    Carte et commandes en ligne   */
+
+
     /*    Boutton    */
 
     .btn {
@@ -669,17 +713,23 @@ footer {
 
 
 
-/*  -------------  Responsive  -------------  */
+/*  -------------  Defaut  -------------  */
 
-body {
+
+body.BodyDefaut {
     height: 500%;
-
+    width: 100%;
 }
 
-main { 
+main.MainDefaut {
+    display: none;
+}
+main.MainDefaut.Active { 
     min-height: 80%;
     max-height: 80%;
+    display: flex;
 }
+
 
 .bandeau1,
 .bandeau2,
@@ -692,6 +742,37 @@ main {
 footer {
     min-height: 21%;
 }
+
+
+/*  -------------  Defaut  -------------  */
+
+
+
+/*  -------------  Carte  -------------  */
+
+
+body.BodyCarte {
+    height: 500%;
+    width: 100%;
+}
+
+main.MainCarte {
+    display: none;
+}
+main.MainCarte.Active { 
+    min-height: 80%;
+    max-height: 80%;
+    display: flex;
+    background: rgb(251, 236, 156);
+}
+
+
+/*  -------------  Carte  -------------  */
+
+
+
+/*  -------------  Responsive  -------------  */
+
 
 @media (width > 990px) {
 
@@ -758,13 +839,6 @@ footer {
         align-items: center;
     }
 }
-
-@media (min-width: 550px) {
-
-     .menuBurgerIcone i:hover {
-            color: yellow;
-        }
-    }
 
 @media (max-width: 550px) {
     .menuBurger {
