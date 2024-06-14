@@ -21,6 +21,8 @@ window.addEventListener('scroll', function() {
 
 /*  ------  Affichage du menu burger  ------  */
 
+const menuBurgerCarte = document.querySelector('.menuBurgerCarte')
+
 const menuBurgerIcone = document.querySelector('.menuBurgerIcone')
 const menuBurgerImage = document.querySelector('.menuBurgerIcone  i')
 const menuBurger = document.querySelector('.menuBurger')
@@ -29,39 +31,81 @@ menuBurgerIcone.onclick = function() {
     menuBurger.classList.toggle('open')
     const isOpen = menuBurger.classList.contains('open')
     menuBurgerImage.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
+    if (isOpen) {
+        menuBurgerCarte.classList.remove('open')
+        imageCarte.src = ImageCarteOriginale;
+    }
 }
 
 
 /*  ------  Passage à la carte ( changement de la classe du body et du "main.activé")  ------  */
+/*  ------   et gestion de l'ouverture du menu burger de la carte   ------   */
 
 const body = document.querySelector('body')
 const mainDefaut = document.querySelector('.MainDefaut')
 const mainCarte = document.querySelector('.MainCarte')
+const retourDebut = document.querySelector('#RetourDebut')
+
 const imageCarte = document.querySelector('.ImgCarte')
-const retourDebut = document.querySelector('#RetourDebut');
+const ImageCarteOriginale = "./Images/IconeMenuRestaurant.png"
+const ImageCarteCroix = "./Images/CroixMenuBlanche.png"
+
 
 imageCarte.onclick = function() {
     const CarteisOpen = mainCarte.classList.contains('Active')
+    const MenuBurgerCarteisOpen = menuBurgerCarte.classList.contains('open')
+
 
     if (CarteisOpen) {
-        mainCarte.classList.remove('Active')
-        mainDefaut.classList.toggle('Active')
-        body.classList.toggle('BodyDefaut')
-        body.classList.remove('BodyCarte')
-        imageCarte.classList.toggle('open')
+
+        if (MenuBurgerCarteisOpen)  {
+            menuBurgerCarte.classList.remove('open')
+        
+        } else {
+            menuBurgerCarte.classList.toggle('open')
+        
+        }
+
     } else {
         mainDefaut.classList.remove('Active')
         mainCarte.classList.toggle('Active')
         body.classList.toggle('BodyCarte')
         body.classList.remove('BodyDefaut')
-        imageCarte.classList.remove('open')
+        setTimeout(() => {
+            retourDebut.scrollIntoView({ behavior: 'smooth' });
+            menuBurgerCarte.classList.toggle('open')
+        }, 200);
     }
+
+    if (imageCarte.src.endsWith(ImageCarteOriginale.split('/').pop())) {
+        imageCarte.src = ImageCarteCroix;
+        menuBurger.classList.remove('open')
+        menuBurgerImage.classList = 'fa-solid fa-bars'
+
+
+    } else {
+        imageCarte.src = ImageCarteOriginale;
+    }
+}
+
+
+/*  ------  Fonction de fermeture de la carte  ------  */
+
+const BouttonQuitterCarte = document.querySelector('.QuitterCarte')
+
+BouttonQuitterCarte.onclick = function() {
+    
+    mainDefaut.classList.toggle('Active')
+    mainCarte.classList.remove('Active')
+    body.classList.toggle('BodyDefaut')
+    body.classList.remove('BodyCarte')
+
+    menuBurgerCarte.classList.remove('open')
 
     setTimeout(() => {
         retourDebut.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    }, 300);
 }
-
 
 /*  ------  Renvoi vers le pied de page des réseaux  ------  */
 
@@ -79,3 +123,5 @@ function AllerFooterBoutons(event) {
 [boutonsTel, boutonsFacebook, boutonsTripadvisor].forEach(bouton => {
     bouton.onclick = AllerFooterBoutons;
 }); 
+
+
