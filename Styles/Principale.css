@@ -366,13 +366,13 @@ main {
     }
   
     .bandeau1 {
-        background: url(Images/FondSite.jpg) fixed 100%;
+        background: url(../Images/FondSite.jpg) fixed 100%;
         background-repeat: no-repeat;
         background-size: cover;
     }
 
     .bandeau3 {
-        background: url(Images/Pates1.jpeg) fixed 100%;
+        background: url(../Images/Pates1.jpeg) fixed 100%;
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -640,12 +640,20 @@ footer {
         position : fixed;
         bottom : 40%;
         right : 0px;
-        display : flex;
+        display: flex;
         flex-direction : column;
-        width: 80px;
-        max-width: 8%;
+        width: 60px;
         overflow: hidden;
-        margin-right: 2%;
+        margin-right: 10px;
+    }
+    @media (height < 420px) {
+        .CarteCommande {
+            bottom: 30%;
+        }
+    }@media (height < 350px) {
+        .CarteCommande {
+            display: none;
+        }
     }
 
     .CarteCommande div {
@@ -667,6 +675,11 @@ footer {
 
     .CarteCommande div img:active {
         opacity: 100%;
+    }
+    @media (width < 550px) { 
+        .CarteCommande div img:hover {
+            opacity: 100%;
+        }
     }
 
     /*    Carte et commandes en ligne   */
@@ -710,15 +723,15 @@ footer {
 /*  -------------  Defaut  -------------  */
 
 
-body.BodyDefaut {
+.BodyDefaut {
     height: 500%;
     width: 100%;
 }
 
-main.MainDefaut {
+.MainDefaut {
     display: none;
 }
-main.MainDefaut.Active { 
+.MainDefaut.Active { 
     min-height: 80%;
     max-height: 80%;
     display: flex;
@@ -744,16 +757,15 @@ footer {
 
 /*  -------------  Carte  -------------  */
 
-
-body.BodyCarte {
+.BodyCarte {
     height: 500%;
     width: 100%;
-}.menuBurger
+}
 
-main.MainCarte {
+.MainCarte {
     display: none;
 }
-main.MainCarte.Active { 
+.MainCarte.Active { 
     min-height: 80%;
     max-height: 80%;
     display: flex;
@@ -763,20 +775,33 @@ main.MainCarte.Active {
     /*    Menu burger    */
 
     .menuBurgerCarte {
-        position: absolute;
+        position: relative;
         height: 0;
         display: block;
         position: fixed;
-        right: 2rem;
-        bottom: 50%;
         z-index: 2;
+        right: 80px;
+        margin-top: 10px;
         overflow: hidden;
         backdrop-filter: blur(3px);
         background: rgba(0,0,0,0.2);
         border-radius: 10px;
-        right: 2rem;
         width: 200px;
         transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @media (width < 255px) { 
+        .menuBurgerCarte {
+            display: none;
+        }
+    }
+    @media (height < 420px) {
+        .menuBurgerCarte {
+            margin-top: 0px;
+        }
+    }@media (height < 350px) {
+        .menuBurgerCarte {
+            display: none;
+        }
     }
 
     .menuBurgerCarte.open {
@@ -828,6 +853,7 @@ main.MainCarte.Active {
         .QuitterCarte span{
             position: relative;
             z-index: 1;
+            text-align: center;
         }
         .QuitterCarte::before {
             content: '';
@@ -855,7 +881,7 @@ main.MainCarte.Active {
     /*    bandeau 1 Carte    */
 
     .Bandeau1Carte {
-        background: url(Images/FondCarte.jpg) fixed 100%;
+        background: url(../Images/FondCarte.jpg) fixed 100%;
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -940,6 +966,11 @@ main.MainCarte.Active {
 @media (max-width: 550px) {
     .menuBurger {
         left: 2rem;
+        width: unset;
+    }
+
+    .menuBurgerCarte {
+        left: 5rem;
         width: unset;
     }
 }

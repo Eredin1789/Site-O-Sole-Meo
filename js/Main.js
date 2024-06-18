@@ -57,23 +57,17 @@ imageCarte.onclick = function() {
 
 
     if (CarteisOpen) {
+        menuBurgerCarte.classList.toggle('open')
 
-        if (MenuBurgerCarteisOpen)  {
-            menuBurgerCarte.classList.remove('open')
-        
-        } else {
-            menuBurgerCarte.classList.toggle('open')
-        
-        }
 
     } else {
+        mainCarte.classList.add('Active')
         mainDefaut.classList.remove('Active')
-        mainCarte.classList.toggle('Active')
-        body.classList.toggle('BodyCarte')
+        body.classList.add('BodyCarte')
         body.classList.remove('BodyDefaut')
         setTimeout(() => {
             retourDebut.scrollIntoView({ behavior: 'smooth' });
-            menuBurgerCarte.classList.toggle('open')
+            menuBurgerCarte.classList.add('open')
         }, 200);
     }
 
@@ -95,9 +89,9 @@ const BouttonQuitterCarte = document.querySelector('.QuitterCarte')
 
 BouttonQuitterCarte.onclick = function() {
     
-    mainDefaut.classList.toggle('Active')
+    mainDefaut.classList.add('Active')
     mainCarte.classList.remove('Active')
-    body.classList.toggle('BodyDefaut')
+    body.classList.add('BodyDefaut')
     body.classList.remove('BodyCarte')
 
     menuBurgerCarte.classList.remove('open')
