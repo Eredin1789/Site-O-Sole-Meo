@@ -732,8 +732,8 @@ footer {
 
 
 .BodyDefaut {
-    height: 500%;
-    width: 100%;
+    height: 500vh;
+    width: 100vh;
 }
 
 .MainDefaut {
@@ -755,7 +755,7 @@ footer {
 }
 
 footer {
-    min-height: 21%;
+    min-height: 100vh;
 }
 
 
