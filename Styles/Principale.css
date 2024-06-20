@@ -545,12 +545,20 @@ main {
 
         .bandeau1 {
             display: flex;
+            flex-direction: column;
+            justify-content: start;
             margin: 0;
+            overflow: hidden;
+        }
+
+        #reproductionNavBar {
+            height: 100px;
+            width: 100%;
         }
 
         #messageCentre {
-            margin-top: 100px;
-            width: 80%;
+            width: 70%;
+            margin: auto;
         }
 
         #messageCentre p {
@@ -742,8 +750,8 @@ footer {
 .bandeau2,
 .bandeau3,
 .bandeau4 {
-    min-height: 25%;
-    max-height: 25%;
+    min-height: 100vh;
+    max-height: 100vh;
 }
 
 footer {
