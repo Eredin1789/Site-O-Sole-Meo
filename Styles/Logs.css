@@ -9,8 +9,8 @@ html {
 
 
 body {
-    width: 100%;
-    height: 100%;
+    width: 100vh;
+    height: 100vh;
     background: rgb(255, 255, 255);
 } 
 
@@ -44,8 +44,8 @@ a:hover {
 main {
     position: absolute;
     display: flex;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vh;
     flex-direction: row;
     justify-content: space-between;
     text-align: center;

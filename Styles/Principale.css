@@ -733,15 +733,14 @@ footer {
 
 .BodyDefaut {
     height: 500vh;
-    width: 100vh;
+    width: 100%;
 }
 
 .MainDefaut {
     display: none;
 }
 .MainDefaut.Active { 
-    min-height: 80%;
-    max-height: 80%;
+    height: 80%;
     display: flex;
 }
 
@@ -751,7 +750,6 @@ footer {
 .bandeau3,
 .bandeau4 {
     min-height: 100vh;
-    max-height: 100vh;
 }
 
 footer {
@@ -766,7 +764,7 @@ footer {
 /*  -------------  Carte  -------------  */
 
 .BodyCarte {
-    height: 500%;
+    height: 500vh;
     width: 100%;
 }
 
@@ -774,8 +772,7 @@ footer {
     display: none;
 }
 .MainCarte.Active { 
-    min-height: 80%;
-    max-height: 80%;
+    height: 80%;
     display: flex;
     background: rgb(251, 236, 156);
 }
