@@ -9,7 +9,7 @@ html {
 
 
 body {
-    width: 100vh;
+    width: 100vw;
     height: 100vh;
     background: rgb(255, 255, 255);
 } 
@@ -44,8 +44,8 @@ a:hover {
 main {
     position: absolute;
     display: flex;
-    height: 100vh;
-    width: 100vh;
+    height: 100%;
+    width: 100%;
     flex-direction: row;
     justify-content: space-between;
     text-align: center;
@@ -57,6 +57,7 @@ main {
     right: 1rem;
     top: 0.7rem;
     font-size:  2rem;
+    z-index: 99;
 }.CroixQuitter:hover {
     font-size: 3rem;
     right: 0.6rem;
@@ -64,18 +65,26 @@ main {
 }
 
 .ImageDroite {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
     background: url(../Images/FondCarte.jpg) fixed 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 50%;
 }
 
-.DivFormulaire {
+.DivGauche {
+    position: absolute;
+    left: 0;
+    top: 0;
     display: flex;
     justify-content: center;
-    background: transparent;
     width: 50%;
+    height: 100%;
+    background: transparent;
     color: rgb(73, 73, 73);
+    
 }
 
 .LogoSoleMeo {
@@ -90,63 +99,66 @@ main {
     .ImageDroite {
         display: none;
     }
-    .DivFormulaire {
-        width: 100%;
-    }
     .LogoSoleMeo {
         position: relative;
         top: 0;
         left: 0;
         
     }
-    .DivFormulaire {
+    .DivGauche {
+        width: 100%;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
     }
 }
 
 
-.formulaire {
+.Divformulaire {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: auto 0px auto 0px;
     gap: 1rem;
+    margin: 0 auto;
 }   /*   Formulaire   */
 
-    .contenuForm {
+    .formulaire {
         display: flex;
         flex-direction: column;
         justify-content: center;
         gap: 1rem;
     }
 
-    .contenuForm div {
+    .formulaire div {
         display: flex;
         flex-direction: row;
         gap: 1rem;
     }
 
-    .contenuForm div div {
+    .formulaire div div {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
 
-    .contenuForm div div div {
+    .formulaire div div div {
         display: flex;
         flex-direction: row;
     }
 
-    .contenuForm input{
+    .formulaire input {
         border-radius: 4px;
         border: 1px solid rgb(64, 64, 64);
+        overflow: hidden; 
+        text-overflow: ellipsis;
     }
     ::placeholder {
         color: rgb(73, 73, 73);
         font-size: 1em;
         padding-left: 0.5rem;
+        white-space: nowrap;
+        overflow: hidden; 
+        text-overflow: ellipsis;
     }
 
     .liensDessous {
@@ -154,6 +166,16 @@ main {
         justify-content: center;
         gap: 1rem;
 
+    }
+
+    @media (max-width: 650px) {
+        .formulaire div {
+            flex-direction: column;
+        }
+    
+        .formulaire div div div {
+            flex-direction: column;
+        }
     }
 
     /*   Formulaire   */
