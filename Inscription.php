@@ -54,6 +54,17 @@
                 </form>
                 
                 <?php 
+
+                    include 'database.php';
+                    global $db;
+
+                    $ResultQuery = $db->query("SELECT * FROM utilisateur");
+
+                    while ($user = $ResultQuery->fetch()) {
+                        var_dump($user);
+                        echo $user;
+                    }
+
                     if(isset($_POST['Envoyer'])) {
 
                         extract($_POST);
