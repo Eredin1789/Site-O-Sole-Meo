@@ -22,34 +22,54 @@
             <div class="Divformulaire">
                 <h2>Inscription</h2>
 
-                <form action="" class="formulaire">
+                <form method="post" class="formulaire">
                     <div>
                         <div>
-                            <input type="text" name="Nom" placeholder="Nom">
-                            <input type="text" name="Prenom" placeholder="Prenom">
-                            <input type="text" name="Telephone" placeholder="Téléphone">
+                            <input type="text" name="Nom" id="Nom" placeholder="Nom" required>
+                            <input type="text" name="Prenom" id="Prenom" placeholder="Prenom" required>
+                            <input type="tel" name="Telephone" id="Telephone" placeholder="Téléphone" required>
                         </div>
                         <div>
-                            <input type="text" name="Adresse" placeholder="Adresse">
-                            <input type="text" name="Ville" placeholder="Ville">
-                            <input type="text" name="CodePostal" placeholder="Code Postal">
+                            <input type="text" name="Adresse" id="Adresse" placeholder="Adresse" required>
+                            <input type="text" name="Ville" id="Ville" placeholder="Ville" required>
+                            <input type="text" name="CodePostal" id="CodePostal" placeholder="Code Postal" required>
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <h4>Informations de connexion</h1>
+                            <span class="dividerForm"></span>
 
-                            <input type="text" name="Email" placeholder="Email">
+                            <input type="email" name="Email" id="Email" placeholder="Email" required> 
                         
                             <div>
-                                <input type="text" name="Mdp" placeholder="Mot de passe">
-                                <input type="text" name="MdpConfirm" placeholder="Ressaisir mot de passe">
+                                <input type="password" name="Mdp" id="Mdp" placeholder="Mot de passe" required>
+                                <input type="password" name="MdpConfirm" id="MdpConfirm" placeholder="Ressaisir mot de passe" required>
                             </div>
+
+                            <input type="submit" name="Envoyer" id="Envoyer" value="S'inscrire">
+
                         </div>
                     </div>
                 </form>
                 
+                <?php 
+                    if(isset($_POST['Envoyer'])) {
+
+                        extract($_POST);
+
+                        if(!empty($Mdp) && !empty($MdpConfirm) && !empty($Email)) {
+                            if($Mdp == $MdpConfirm) {
+                                $option = [
+                                    'cost' => 12,
+                                ];
+
+                                $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option);
+                            }
+                        }
+                    }
+                ?>
+
                 <div class="liensDessous">
                     <a href="index.html">Retour</a>
                     <p>|</p>

@@ -146,6 +146,13 @@ main {
         flex-direction: row;
     }
 
+    .dividerForm {
+        align-self: center;
+        height: 1px;
+        width: 90%;
+        background: yellowgreen;
+    }
+
     .formulaire input {
         border-radius: 4px;
         border: 1px solid rgb(64, 64, 64);
