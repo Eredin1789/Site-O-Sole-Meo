@@ -27,7 +27,7 @@
                         <div>
                             <input type="text" name="Nom" id="Nom" placeholder="Nom" required>
                             <input type="text" name="Prenom" id="Prenom" placeholder="Prenom" required>
-                            <input type="tel" name="Telephone" id="Telephone" placeholder="Téléphone" required>
+                            <input type="text" name="Telephone" id="Telephone" placeholder="Téléphone" required>
                         </div>
                         <div>
                             <input type="text" name="Adresse" id="Adresse" placeholder="Adresse" required>
@@ -54,28 +54,62 @@
                 </form>
                 
                 <?php 
-
-                    include 'database.php';
-                    global $db;
-
-                    $ResultQuery = $db->query("SELECT * FROM utilisateur");
-
-                    while ($user = $ResultQuery->fetch()) {
-                        var_dump($user);
-                        echo $user;
-                    }
-
                     if(isset($_POST['Envoyer'])) {
 
                         extract($_POST);
 
-                        if(!empty($Mdp) && !empty($MdpConfirm) && !empty($Email)) {
+                        if(!empty($Mdp) && !empty($MdpConfirm) && !empty($Email) && !empty($CodePostal) && !empty($Ville) && !empty($Adresse) && !empty($Telephone) && !empty($Prenom) && !empty($Nom)) {
                             if($Mdp == $MdpConfirm) {
                                 $option = [
                                     'cost' => 12,
                                 ];
-
                                 $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option);
+                               
+//if (password_verify($Mdp, $hashpass)) {}
+
+                                // Connexion à la base de données :
+
+                                include 'includes/database.php';
+                                global $db;
+
+
+                                // Vérification du unique :
+
+                                $c = $db->prepare("SELECT Email FROM utilisateur WHERE Email =:Email");
+                                $c->execute([
+                                    'Email' => $Email
+                                ]);
+
+                                $result = $c->rowCount();
+                                if ($result = 0) {
+                                    // Insertion des données :
+
+                                    $q = $db->prepare("INSERT INTO utilisateur(Nom,Prenom,Tel,Adresse,Ville,CodePostal,Email,MDP) VALUES(:Nom,:Prenom,:Tel,:Adresse,:Ville,:CodePostal,:Email,:MDP)");
+                                    $q->execute([
+                                        'Nom' => $Nom,
+                                        'Prenom' => $Prenom,
+                                        'Tel' => $Telephone,
+                                        'Adresse' => $Adresse,
+                                        'Ville' => $Ville,
+                                        'CodePostal' => $CodePostal,
+                                        'Email' => $Email,
+                                        'MDP' => $hashpass
+                                    ]);
+
+
+                                    // Affichage des données :
+
+                                    $q = $db->query("SELECT * FROM utilisateur");
+                                    while ($user = $q->fetch()) { ?>
+
+                                        <li>
+                                            <a href="profile.php?q=<?= $user['id']; ?>"><?= $user['Email']; $user['MDP']; ?></a>
+                                        </li>
+                                        <?php
+                                    }
+                                } else {
+    /**/                               echo "Email deja existant !";
+                                }
                             }
                         }
                     }
