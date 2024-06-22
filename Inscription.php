@@ -1,3 +1,27 @@
+<?php /*session_start(); 
+
+    $_SESSION['id'] = "id";
+    $_SESSION['age'] = 18;*/
+
+
+
+//if (password_verify($Mdp, $hashpass)) {}
+
+
+
+/*// Affichage des données :
+
+    $q = $db->query("SELECT * FROM utilisateur");
+    while ($user = $q->fetch()) { ?>
+
+        <li>
+            <a href="profile.php?q=<?= $user['id']; ?>"><?= $user['Email']; $user['MDP']; ?></a>
+        </li>
+        <?php
+}*/
+
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -20,7 +44,7 @@
             <img src="Images/LogoSoleMeo.png" class="LogoSoleMeo" alt="LogoSoleMeo">
 
             <div class="Divformulaire">
-                <h2>Inscription</h2>
+                <h2 class="NomFormulaire">Inscription</h2>
 
                 <form method="post" class="formulaire">
                     <div>
@@ -59,66 +83,77 @@
                         extract($_POST);
 
                         if(!empty($Mdp) && !empty($MdpConfirm) && !empty($Email) && !empty($CodePostal) && !empty($Ville) && !empty($Adresse) && !empty($Telephone) && !empty($Prenom) && !empty($Nom)) {
-                            if($Mdp == $MdpConfirm) {
-                                $option = [
-                                    'cost' => 12,
-                                ];
-                                $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option);
-                               
-//if (password_verify($Mdp, $hashpass)) {}
+                            
 
-                                // Connexion à la base de données :
+                            // Connexion à la base de données :
 
-                                include 'includes/database.php';
-                                global $db;
+                            include 'includes/database.php';
+                            global $db;
 
 
-                                // Vérification du unique :
+                            // Vérification du mail unique :
 
-                                $c = $db->prepare("SELECT Email FROM utilisateur WHERE Email =:Email");
-                                $c->execute([
-                                    'Email' => $Email
-                                ]);
+                            $c = $db->prepare("SELECT Email FROM utilisateur WHERE Email =:Email");
+                            $c->execute([
+                                'Email' => $Email
+                            ]);
 
-                                $result = $c->rowCount();
-                                if ($result = 0) {
-                                    // Insertion des données :
-
-                                    $q = $db->prepare("INSERT INTO utilisateur(Nom,Prenom,Tel,Adresse,Ville,CodePostal,Email,MDP) VALUES(:Nom,:Prenom,:Tel,:Adresse,:Ville,:CodePostal,:Email,:MDP)");
-                                    $q->execute([
-                                        'Nom' => $Nom,
-                                        'Prenom' => $Prenom,
-                                        'Tel' => $Telephone,
-                                        'Adresse' => $Adresse,
-                                        'Ville' => $Ville,
-                                        'CodePostal' => $CodePostal,
-                                        'Email' => $Email,
-                                        'MDP' => $hashpass
-                                    ]);
+                            $result = $c->rowCount();
+                            if ($result == 0) {
 
 
-                                    // Affichage des données :
+                                // Vérification du mot de passe rempli deux fois :
 
-                                    $q = $db->query("SELECT * FROM utilisateur");
-                                    while ($user = $q->fetch()) { ?>
+                                if($Mdp == $MdpConfirm) {
 
-                                        <li>
-                                            <a href="profile.php?q=<?= $user['id']; ?>"><?= $user['Email']; $user['MDP']; ?></a>
-                                        </li>
-                                        <?php
+                                    $email_a = 'joe@example';
+                                    if (filter_var($email_a, FILTER_VALIDATE_EMAIL)) {
+                                        echo "L'adresse email '$email_a' est considérée comme valide.";
                                     }
-                                } else {
-    /**/                               echo "Email deja existant !";
-                                }
-                            }
-                        }
+
+
+                                    // Vérification de la taille du mot de passe :
+
+                                    $longueurMdp = strlen($Mdp);				
+
+                                    if ($longueurMdp > 8) {
+
+                                        $option = [
+                                            'cost' => 12,
+                                        ];// Hashage du Mdp
+                                        $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option); 
+                                
+
+                                        // Insertion des données :
+
+                                        $q = $db->prepare("INSERT INTO utilisateur(Nom,Prenom,Tel,Adresse,Ville,CodePostal,Email,MDP) VALUES(:Nom,:Prenom,:Tel,:Adresse,:Ville,:CodePostal,:Email,:MDP)");
+                                        $q->execute([
+                                            'Nom' => $Nom,
+                                            'Prenom' => $Prenom,
+                                            'Tel' => $Telephone,
+                                            'Adresse' => $Adresse,
+                                            'Ville' => $Ville,
+                                            'CodePostal' => $CodePostal,
+                                            'Email' => $Email,
+                                            'MDP' => $hashpass
+                                        ]);
+
+                                        echo '<p class="AjoutPhp">Inscription réalisée avec succès</p>';
+
+                                    } else { echo '<p class="AjoutPhp">Le mot de passe est trop court !</p>'; }
+
+                                } else { echo '<p class="AjoutPhp">La confirmation du mot de passe est différente de celui-ci !</p>'; }
+
+                            } else { echo '<p class="AjoutPhp">Email déjà utilisé pour un autre compte !</p>'; }
+
+                        } else { echo '<p class="AjoutPhp">Un des champs ' . "n'a pas été rempli</p>"; }
                     }
                 ?>
 
                 <div class="liensDessous">
                     <a href="index.html">Retour</a>
-                    <p>|</p>
-                    <a href="index.html">Déja un compte ?</a>
+                    <span></span>
+                    <a href="index.html">Déjà un compte ?</a>
                 </div>
             </div>
         </div>
