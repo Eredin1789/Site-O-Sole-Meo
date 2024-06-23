@@ -12,6 +12,8 @@ body {
     width: 100vw;
     height: 100vh;
     background: rgb(255, 255, 255);
+    max-width: 100vw;
+    overflow-x: hidden;
 } 
 
 .poppins-light {
@@ -21,7 +23,7 @@ body {
 }
 
 a { 
-    color: #000000;
+    color: #ffffff;
 }
 a:hover {
     color : orange;
@@ -84,7 +86,7 @@ main {
     height: 100%;
     background: transparent;
     color: rgb(73, 73, 73);
-    
+    max-width: 100vw;
 }
 
 .LogoSoleMeo {
@@ -117,10 +119,17 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-self: center;
     gap: 1rem;
     margin: 0 auto;
     max-width: 90%;
-    border: red solid 1px;
+    height: fit-content;
+
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 4px;
+    color: white;
+    width: 404px;
 
 }   /*   Formulaire   */
 
@@ -159,15 +168,26 @@ main {
         align-self: center;
         height: 1px;
         width: 90%;
-        background: yellowgreen;
+        background: rgb(255, 255, 255);
     }
 
     .formulaire input {
         border: 1px rgb(73, 73, 73) solid;
         border-radius: 4px;
         width: 100%;
-        overflow: hidden; /* 2 BUGS !!!!! ((((((((((((((((((((((((((((((((((*/
-        text-overflow: ellipsis; /*((((((((((((((((((((((((((((((((((*/
+        padding: 2px 0;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+    }
+
+    .formulaire #Envoyer {
+        background: rgb(73, 73, 73);
+        color: #ffffff;
+        width: fit-content;
+        padding: 2px 1rem;
+        max-width: 100%;
+    } .formulaire #Envoyer:hover {
+        opacity: 75%;
     }
 
     ::placeholder {
@@ -179,6 +199,11 @@ main {
         text-overflow: ellipsis;
     }
 
+    .liensDessous div {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     .liensDessous {
         display: flex;
         justify-content: center;
@@ -197,10 +222,19 @@ main {
         .liensDessous {
             flex-direction: column;
         }
-
         .liensDessous span {
             height: 1px;
             width: 90%;
+        }
+
+        .LogoSoleMeo {
+            visibility: hidden;
+        }
+
+        .CroixQuitter {
+            left: 15%;
+        } .CroixQuitter:hover {
+            left: 10%;
         }
     }
 
@@ -208,6 +242,12 @@ main {
         width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+        background: #ffffff;
+        border-radius: 4px;
+        color: #000000;
+        padding: 2px;
+        align-self: center;
+        max-width: 400px;
     }
 
     @media (max-width: 650px) {

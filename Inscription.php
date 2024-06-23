@@ -20,8 +20,100 @@
         <?php
 }*/
 
+    $RecupEmail = '';
+    $RecupCodePostal = '';
+    $RecupVille = '';
+    $RecupAdresse = '';
+    $RecupTelephone = '';
+    $RecupPrenom = '';
+    $RecupNom = '';
 
+
+    if(isset($_POST['Envoyer'])) {
+
+        $Message = '';
+
+        extract($_POST);
+        
+        $RecupEmail = $Email;
+        $RecupCodePostal = $CodePostal;
+        $RecupVille = $Ville;
+        $RecupAdresse = $Adresse;
+        $RecupTelephone = $Telephone;
+        $RecupPrenom = $Prenom;
+        $RecupNom = $Nom;
+
+        if(!empty($Mdp) && !empty($MdpConfirm) && !empty($Email) && !empty($CodePostal) && !empty($Ville) && !empty($Adresse) && !empty($Telephone) && !empty($Prenom) && !empty($Nom)) {
+            
+
+            // Connexion à la base de données :
+
+            include 'includes/database.php';
+            global $db;
+
+
+            // Vérification du mail unique :
+
+            $c = $db->prepare("SELECT Email FROM utilisateur WHERE Email =:Email");
+            $c->execute([
+                'Email' => $Email
+            ]);
+
+            $result = $c->rowCount();
+            if ($result == 0) {
+
+
+                // Vérification du mot de passe rempli deux fois :
+
+                if($Mdp == $MdpConfirm) {
+
+                    $email_a = 'joe@example';
+                    if (filter_var($email_a, FILTER_VALIDATE_EMAIL)) {
+                        echo "L'adresse email '$email_a' est considérée comme valide.";
+                    }
+
+
+                    // Vérification de la conformité du mot de passe :
+
+                    if (preg_match('/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/', $Mdp)) {
+
+                        if (preg_match('/^0\d{9}$/', $Telephone)) {
+
+                            $option = [
+                                'cost' => 12,
+                            ];// Hashage du Mdp
+                            $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option); 
+                    
+
+                            // Insertion des données :
+
+                            $q = $db->prepare("INSERT INTO utilisateur(Nom,Prenom,Tel,Adresse,Ville,CodePostal,Email,MDP) VALUES(:Nom,:Prenom,:Tel,:Adresse,:Ville,:CodePostal,:Email,:MDP)");
+                            $q->execute([
+                                'Nom' => $Nom,
+                                'Prenom' => $Prenom,
+                                'Tel' => $Telephone,
+                                'Adresse' => $Adresse,
+                                'Ville' => $Ville,
+                                'CodePostal' => $CodePostal,
+                                'Email' => $Email,
+                                'MDP' => $hashpass
+                            ]);
+
+                            $Message = '<p class="AjoutPhp">Inscription réalisée avec succès</p>';
+
+                        } else { $Message = '<p class="AjoutPhp">Le numéro de téléphone ' . "n'est pas valide !</p>"; }
+
+                    } else { $Message = '<p class="AjoutPhp">Le mot ' . " n'est pas conforme !</p>"; }
+
+                } else { $Message = '<p class="AjoutPhp">La confirmation du mot de passe est différente de celui-ci !</p>'; }
+
+            } else { $Message = '<p class="AjoutPhp">Email déjà utilisé pour un autre compte !</p>'; }
+
+        } else { $Message = '<p class="AjoutPhp">Un des champs ' . "n'a pas été rempli</p>"; }
+
+    } 
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -49,14 +141,14 @@
                 <form method="post" class="formulaire">
                     <div>
                         <div>
-                            <input type="text" name="Nom" id="Nom" placeholder="Nom" required>
-                            <input type="text" name="Prenom" id="Prenom" placeholder="Prenom" required>
-                            <input type="text" name="Telephone" id="Telephone" placeholder="Téléphone" required>
+                            <input type="text" name="Nom" id="Nom" placeholder="Nom" value="<?= htmlspecialchars($RecupNom) ?>" required>
+                            <input type="text" name="Prenom" id="Prenom" placeholder="Prenom" value="<?= htmlspecialchars($RecupPrenom) ?>" required>
+                            <input type="text" name="Telephone" id="Telephone" placeholder="Téléphone" value="<?= htmlspecialchars($RecupTelephone) ?>" required>
                         </div>
                         <div>
-                            <input type="text" name="Adresse" id="Adresse" placeholder="Adresse" required>
-                            <input type="text" name="Ville" id="Ville" placeholder="Ville" required>
-                            <input type="text" name="CodePostal" id="CodePostal" placeholder="Code Postal" required>
+                            <input type="text" name="Adresse" id="Adresse" placeholder="Adresse" value="<?= htmlspecialchars($RecupAdresse) ?>" required>
+                            <input type="text" name="Ville" id="Ville" placeholder="Ville" value="<?= htmlspecialchars($RecupVille) ?>" required>
+                            <input type="text" name="CodePostal" id="CodePostal" placeholder="Code Postal" value="<?= htmlspecialchars($RecupCodePostal) ?>" required>
                         </div>
                     </div>
 
@@ -64,7 +156,7 @@
                         <div>
                             <span class="dividerForm"></span>
 
-                            <input type="email" name="Email" id="Email" placeholder="Email" required> 
+                            <input type="email" name="Email" id="Email" placeholder="Email" value="<?= htmlspecialchars($RecupEmail) ?>" required> 
                         
                             <div>
                                 <input type="password" name="Mdp" id="Mdp" placeholder="Mot de passe" required>
@@ -77,83 +169,20 @@
                     </div>
                 </form>
                 
-                <?php 
-                    if(isset($_POST['Envoyer'])) {
-
-                        extract($_POST);
-
-                        if(!empty($Mdp) && !empty($MdpConfirm) && !empty($Email) && !empty($CodePostal) && !empty($Ville) && !empty($Adresse) && !empty($Telephone) && !empty($Prenom) && !empty($Nom)) {
-                            
-
-                            // Connexion à la base de données :
-
-                            include 'includes/database.php';
-                            global $db;
-
-
-                            // Vérification du mail unique :
-
-                            $c = $db->prepare("SELECT Email FROM utilisateur WHERE Email =:Email");
-                            $c->execute([
-                                'Email' => $Email
-                            ]);
-
-                            $result = $c->rowCount();
-                            if ($result == 0) {
-
-
-                                // Vérification du mot de passe rempli deux fois :
-
-                                if($Mdp == $MdpConfirm) {
-
-                                    $email_a = 'joe@example';
-                                    if (filter_var($email_a, FILTER_VALIDATE_EMAIL)) {
-                                        echo "L'adresse email '$email_a' est considérée comme valide.";
-                                    }
-
-
-                                    // Vérification de la taille du mot de passe :
-
-                                    $longueurMdp = strlen($Mdp);				
-
-                                    if ($longueurMdp > 8) {
-
-                                        $option = [
-                                            'cost' => 12,
-                                        ];// Hashage du Mdp
-                                        $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option); 
-                                
-
-                                        // Insertion des données :
-
-                                        $q = $db->prepare("INSERT INTO utilisateur(Nom,Prenom,Tel,Adresse,Ville,CodePostal,Email,MDP) VALUES(:Nom,:Prenom,:Tel,:Adresse,:Ville,:CodePostal,:Email,:MDP)");
-                                        $q->execute([
-                                            'Nom' => $Nom,
-                                            'Prenom' => $Prenom,
-                                            'Tel' => $Telephone,
-                                            'Adresse' => $Adresse,
-                                            'Ville' => $Ville,
-                                            'CodePostal' => $CodePostal,
-                                            'Email' => $Email,
-                                            'MDP' => $hashpass
-                                        ]);
-
-                                        echo '<p class="AjoutPhp">Inscription réalisée avec succès</p>';
-
-                                    } else { echo '<p class="AjoutPhp">Le mot de passe est trop court !</p>'; }
-
-                                } else { echo '<p class="AjoutPhp">La confirmation du mot de passe est différente de celui-ci !</p>'; }
-
-                            } else { echo '<p class="AjoutPhp">Email déjà utilisé pour un autre compte !</p>'; }
-
-                        } else { echo '<p class="AjoutPhp">Un des champs ' . "n'a pas été rempli</p>"; }
-                    }
+                <?=
+                    $Message
                 ?>
 
                 <div class="liensDessous">
-                    <a href="index.html">Retour</a>
+                    <div>
+                        <a href="index.html">Retour</a>
+                    </div>
+
                     <span></span>
-                    <a href="index.html">Déjà un compte ?</a>
+
+                    <div>
+                        <a href="index.html">Déjà un compte ?</a>
+                    </div>
                 </div>
             </div>
         </div>
