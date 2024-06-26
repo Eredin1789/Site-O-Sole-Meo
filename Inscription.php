@@ -28,13 +28,19 @@
     $RecupPrenom = '';
     $RecupNom = '';
 
-
     if(isset($_POST['Envoyer'])) {
 
         $Message = '';
 
         extract($_POST);
-        
+
+
+        // Extraction des données :
+/*
+        $Nom = filter_input(INPUT_POST, 'Nom', FILTER_SANITIZE_STRING);
+extraction        $Prenom = filter_input(INPUT_POST, 'Prenom', FILTER_SANITIZE_STRING);
+        $Email = filter_input(INPUT_POST, 'Email', FILTER_VALIDATE_EMAIL);
+*/        
         $RecupEmail = $Email;
         $RecupCodePostal = $CodePostal;
         $RecupVille = $Ville;
@@ -52,52 +58,85 @@
             global $db;
 
 
-            // Vérification du mail unique :
+    // Vérification du mail unique :
 
-            $c = $db->prepare("SELECT Email FROM utilisateur WHERE Email =:Email");
-            $c->execute([
-                'Email' => $Email
-            ]);
+            $sql = "SELECT Email FROM utilisateur WHERE Email = :Email";
 
-            $result = $c->rowCount();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(":Email", $Email, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            $result = $stmt->rowCount();
             if ($result == 0) {
 
 
-                // Vérification du mot de passe rempli deux fois :
+        // Vérification du mot de passe rempli deux fois :
 
                 if($Mdp == $MdpConfirm) {
 
-                    $email_a = 'joe@example';
+/**/                    $email_a = 'joe@example';
                     if (filter_var($email_a, FILTER_VALIDATE_EMAIL)) {
                         echo "L'adresse email '$email_a' est considérée comme valide.";
                     }
 
 
-                    // Vérification de la conformité du mot de passe :
+            // Vérification de la conformité du mot de passe :
 
                     if (preg_match('/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/', $Mdp)) {
 
+
+                // Vérification de la conformité du téléphone :
+
                         if (preg_match('/^0\d{9}$/', $Telephone)) {
 
+
+                            // Création de la clé de confirmaton mail :  :
+
+                            $Key = bin2hex(random_bytes(16));
+    
+
+                            // Hashage du Mdp :
+
                             $option = [
-                                'cost' => 12,
-                            ];// Hashage du Mdp
+ /*pas fou*/                               'cost' => 12,
+                            ];
                             $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option); 
                     
 
-                            // Insertion des données :
+                    // Insertion des données :
 
-                            $q = $db->prepare("INSERT INTO utilisateur(Nom,Prenom,Tel,Adresse,Ville,CodePostal,Email,MDP) VALUES(:Nom,:Prenom,:Tel,:Adresse,:Ville,:CodePostal,:Email,:MDP)");
-                            $q->execute([
-                                'Nom' => $Nom,
-                                'Prenom' => $Prenom,
-                                'Tel' => $Telephone,
-                                'Adresse' => $Adresse,
-                                'Ville' => $Ville,
-                                'CodePostal' => $CodePostal,
-                                'Email' => $Email,
-                                'MDP' => $hashpass
-                            ]);
+
+                            $sql = "INSERT INTO utilisateur(Nom, Prenom, Tel, Adresse, Ville, CodePostal, Email, MDP, ConfirmKey) VALUES(:Nom, :Prenom, :Tel, :Adresse, :Ville, :CodePostal, :Email, :MDP, :ConfirmKey)";
+                            $stmt = $db->prepare($sql);
+
+
+                            // Spécification des paramètres de la requête :
+
+                            $params = [
+                                ':Nom' => ['value' => $Nom, 'type' => PDO::PARAM_STR],
+                                ':Prenom' => ['value' => $Prenom, 'type' => PDO::PARAM_STR],
+                                ':Tel' => ['value' => $Telephone, 'type' => PDO::PARAM_STR],
+
+                                ':Adresse' => ['value' => $Adresse, 'type' => PDO::PARAM_STR],
+                                ':Ville' => ['value' => $Ville, 'type' => PDO::PARAM_STR],
+                                ':CodePostal' => ['value' => $CodePostal, 'type' => PDO::PARAM_STR],
+                                ':Email' => ['value' => $Email, 'type' => PDO::PARAM_STR],
+                                ':MDP' => ['value' => $hashpass, 'type' => PDO::PARAM_STR],
+                                ':ConfirmKey' => ['value' => $Key, 'type' => PDO::PARAM_STR]
+                            ];
+
+                            // Liaison des paramètres avec spécification des types de données :
+
+                            foreach ($params as $Parametre => $param) {
+                                $stmt->bindValue($Parametre, $param['value'], $param['type']);
+                            }
+                            
+                            $stmt->execute();
+                            
+                            //  :
+
 
                             $Message = '<p class="AjoutPhp">Inscription réalisée avec succès</p>';
 
@@ -143,7 +182,7 @@
                         <div>
                             <input type="text" name="Nom" id="Nom" placeholder="Nom" value="<?= htmlspecialchars($RecupNom) ?>" required>
                             <input type="text" name="Prenom" id="Prenom" placeholder="Prenom" value="<?= htmlspecialchars($RecupPrenom) ?>" required>
-                            <input type="text" name="Telephone" id="Telephone" placeholder="Téléphone" value="<?= htmlspecialchars($RecupTelephone) ?>" required>
+                            <input type="text" name="Telephone" id="Telephone" placeholder="Téléphone (06 03..." value="<?= htmlspecialchars($RecupTelephone) ?>" required>
                         </div>
                         <div>
                             <input type="text" name="Adresse" id="Adresse" placeholder="Adresse" value="<?= htmlspecialchars($RecupAdresse) ?>" required>
@@ -159,8 +198,8 @@
                             <input type="email" name="Email" id="Email" placeholder="Email" value="<?= htmlspecialchars($RecupEmail) ?>" required> 
                         
                             <div>
-                                <input type="password" name="Mdp" id="Mdp" placeholder="Mot de passe" required>
-                                <input type="password" name="MdpConfirm" id="MdpConfirm" placeholder="Ressaisir mot de passe" required>
+                                <input type="password" name="Mdp" id="Mdp" placeholder="Mot de passe" value="aaaaaaaA!" required>
+                                <input type="password" name="MdpConfirm" id="MdpConfirm" placeholder="Ressaisir mot de passe" value="aaaaaaaA!" required>
                             </div>
 
                             <input type="submit" name="Envoyer" id="Envoyer" value="S'inscrire">
