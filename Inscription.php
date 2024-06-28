@@ -61,103 +61,111 @@
         $RecupNom = $Nom;
 
         if(!empty($Mdp) && !empty($MdpConfirm) && !empty($Email) && !empty($CodePostal) && !empty($Ville) && !empty($Adresse) && !empty($Telephone) && !empty($Prenom) && !empty($Nom)) {
+
+
+    // Vérification du Nom et Prenom valide :
+
+            $ParametresValides = '/^[a-zA-Zà-ÿÀ-ÿ\-]+$/u';
+
+/* Pas sure */            if (preg_match($ParametresValides, $Prenom) && preg_match($ParametresValides, $Nom)) {
+
+        // Vérification du mail valide :
+
+                if (filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+                
+                // Connexion à la base de données :
+
+                include 'includes/database.php';
+                global $db;
+
+                
+            // Vérification du mail unique :
+
+                    $sql = "SELECT Email FROM utilisateur WHERE Email = :Email";
+
+                    $stmt = $db->prepare($sql);
+
+                    $stmt->bindValue(":Email", $Email, PDO::PARAM_STR);
+
+                    $stmt->execute();
+
+                    $result = $stmt->rowCount();
+                    if ($result == 0) {
+
+
+                // Vérification du mot de passe rempli deux fois :
+
+                        if($Mdp == $MdpConfirm) {
+
+
+                    // Vérification de la conformité du mot de passe :
+
+                            if (preg_match('/^(?=.*[A-Z])(?=.*[\W_]).{8,20}$/', $Mdp)) {
+
+
+                        // Vérification de la conformité du téléphone :
+
+                                if (preg_match('/^0\d{9}$/', $Telephone)) {
+
+
+                                    // Création de la clé de confirmaton mail :  :
+
+                                    $Key = bin2hex(random_bytes(16));
             
 
-    // Vérification du mail unique :
+                                    // Hashage du Mdp :
 
-            if (filter_var($Email, FILTER_VALIDATE_EMAIL)) {
-              
-            // Connexion à la base de données :
+                                    $option = [
+        /*pas fou*/                               'cost' => 12,
+                                    ];
+                                    $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option); 
+                            
 
-            include 'includes/database.php';
-            global $db;
-
-            
-        // Vérification du mail unique :
-
-                $sql = "SELECT Email FROM utilisateur WHERE Email = :Email";
-
-                $stmt = $db->prepare($sql);
-
-                $stmt->bindValue(":Email", $Email, PDO::PARAM_STR);
-
-                $stmt->execute();
-
-                $result = $stmt->rowCount();
-                if ($result == 0) {
+                            // Insertion des données :
 
 
-            // Vérification du mot de passe rempli deux fois :
-
-                    if($Mdp == $MdpConfirm) {
-
-
-                // Vérification de la conformité du mot de passe :
-
-                        if (preg_match('/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/', $Mdp)) {
+                                    $sql = "INSERT INTO utilisateur(Nom, Prenom, Tel, Adresse, Ville, CodePostal, Email, MDP, ConfirmKey) VALUES(:Nom, :Prenom, :Tel, :Adresse, :Ville, :CodePostal, :Email, :MDP, :ConfirmKey)";
+                                    $stmt = $db->prepare($sql);
 
 
-                    // Vérification de la conformité du téléphone :
+                                    // Spécification des paramètres de la requête :
 
-                            if (preg_match('/^0\d{9}$/', $Telephone)) {
+                                    $params = [
+                                        ':Nom' =>  $Nom,
+                                        ':Prenom' => $Prenom,
+                                        ':Tel' => $Telephone,
+                                        ':Adresse' => $Adresse,
+                                        ':Ville' => $Ville,
+                                        ':CodePostal' => $CodePostal,
+                                        ':Email' => $Email,
+                                        ':MDP' => $hashpass,
+                                        ':ConfirmKey' => $Key
+                                    ];
 
+                                    // Liaison des paramètres avec spécification des types de données :
 
-                                // Création de la clé de confirmaton mail :  :
-
-                                $Key = bin2hex(random_bytes(16));
-        
-
-                                // Hashage du Mdp :
-
-                                $option = [
-    /*pas fou*/                               'cost' => 12,
-                                ];
-                                $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option); 
-                        
-
-                        // Insertion des données :
-
-
-                                $sql = "INSERT INTO utilisateur(Nom, Prenom, Tel, Adresse, Ville, CodePostal, Email, MDP, ConfirmKey) VALUES(:Nom, :Prenom, :Tel, :Adresse, :Ville, :CodePostal, :Email, :MDP, :ConfirmKey)";
-                                $stmt = $db->prepare($sql);
-
-
-                                // Spécification des paramètres de la requête :
-
-                                $params = [
-                                    ':Nom' =>  $Nom,
-                                    ':Prenom' => $Prenom,
-                                    ':Tel' => $Telephone,
-                                    ':Adresse' => $Adresse,
-                                    ':Ville' => $Ville,
-                                    ':CodePostal' => $CodePostal,
-                                    ':Email' => $Email,
-                                    ':MDP' => $hashpass,
-                                    ':ConfirmKey' => $Key
-                                ];
-
-                                // Liaison des paramètres avec spécification des types de données :
-
-                                foreach ($params as $Parametre => $Value) {
-                                    $stmt->bindValue($Parametre, $Value, PDO::PARAM_STR);
-                                }
-                                
-                                $stmt->execute();
-                                
-                                //  :
+                                    foreach ($params as $Parametre => $Value) {
+                                        $stmt->bindValue($Parametre, $Value, PDO::PARAM_STR);
+                                    }
+                                    
+                                    $stmt->execute();
+                                    
+                                    //  :
 
 
-                                $Message = 'Inscription réalisée avec succès !';
+                                    $Message = 'Inscription réalisée avec succès !';
 
-                            } else { $Message = 'Le numéro de téléphone n\'est pas valide !'; }
+                                } else { $Message = 'Le numéro de téléphone n\'est pas valide !'; }
 
-                        } else { $Message = 'Le mot n\'est pas conforme !'; }
+                            } else { $Message = 'Le mot n\'est pas conforme !'; }
 
-                    } else { $Message = 'La confirmation du mot de passe est différente de celui-ci !'; }
+                        } else { $Message = 'La confirmation du mot de passe est différente de celui-ci !'; }
 
-                } else { $Message = 'Email déjà utilisé pour un autre compte !'; }
+                    } else { $Message = 'Email déjà utilisé pour un autre compte !'; }
 
-            } else { $Message = 'Email non valide !'; }
+                } else { $Message = 'Email non valide !'; }
+
+            } else { $Message = 'Nom ou Prénom non valide !'; }
         
         } else { $Message = 'Un des champs n\'a pas été rempli !'; }
 
