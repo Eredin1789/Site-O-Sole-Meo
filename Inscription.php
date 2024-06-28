@@ -28,19 +28,30 @@
     $RecupPrenom = '';
     $RecupNom = '';
 
-    if(isset($_POST['Envoyer'])) {
+    $Message = '';
 
-        $Message = '';
-
-        extract($_POST);
+    if($_SERVER["REQUEST_METHOD"] == "POST") { 
 
 
-        // Extraction des données :
-/*
-        $Nom = filter_input(INPUT_POST, 'Nom', FILTER_SANITIZE_STRING);
-extraction        $Prenom = filter_input(INPUT_POST, 'Prenom', FILTER_SANITIZE_STRING);
-        $Email = filter_input(INPUT_POST, 'Email', FILTER_VALIDATE_EMAIL);
-*/        
+// Purification et validation des données :
+
+        function NettoyageVar($Variable) {
+            return htmlspecialchars(strip_tags(trim($Variable)), ENT_QUOTES, 'UTF-8');
+        }
+
+        $Nom = NettoyageVar($_POST['Nom'] ?? '');
+        $Prenom = NettoyageVar($_POST['Prenom'] ?? '');
+        $Telephone = NettoyageVar($_POST['Telephone'] ?? '');
+        $Adresse = NettoyageVar($_POST['Adresse'] ?? '');
+        $Ville = NettoyageVar($_POST['Ville'] ?? '');
+        $CodePostal = NettoyageVar($_POST['CodePostal'] ?? '');
+
+        $Email = filter_var(NettoyageVar($_POST['Email'] ?? ''), FILTER_SANITIZE_EMAIL);
+
+        $Mdp = NettoyageVar($_POST['Mdp'] ?? '');
+        $MdpConfirm = NettoyageVar($_POST['MdpConfirm'] ?? '');
+        
+
         $RecupEmail = $Email;
         $RecupCodePostal = $CodePostal;
         $RecupVille = $Ville;
@@ -52,105 +63,107 @@ extraction        $Prenom = filter_input(INPUT_POST, 'Prenom', FILTER_SANITIZE_S
         if(!empty($Mdp) && !empty($MdpConfirm) && !empty($Email) && !empty($CodePostal) && !empty($Ville) && !empty($Adresse) && !empty($Telephone) && !empty($Prenom) && !empty($Nom)) {
             
 
+    // Vérification du mail unique :
+
+            if (filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+              
             // Connexion à la base de données :
 
             include 'includes/database.php';
             global $db;
 
+            
+        // Vérification du mail unique :
 
-    // Vérification du mail unique :
+                $sql = "SELECT Email FROM utilisateur WHERE Email = :Email";
 
-            $sql = "SELECT Email FROM utilisateur WHERE Email = :Email";
+                $stmt = $db->prepare($sql);
 
-            $stmt = $db->prepare($sql);
+                $stmt->bindValue(":Email", $Email, PDO::PARAM_STR);
 
-            $stmt->bindValue(":Email", $Email, PDO::PARAM_STR);
+                $stmt->execute();
 
-            $stmt->execute();
-
-            $result = $stmt->rowCount();
-            if ($result == 0) {
-
-
-        // Vérification du mot de passe rempli deux fois :
-
-                if($Mdp == $MdpConfirm) {
-
-/**/                    $email_a = 'joe@example';
-                    if (filter_var($email_a, FILTER_VALIDATE_EMAIL)) {
-                        echo "L'adresse email '$email_a' est considérée comme valide.";
-                    }
+                $result = $stmt->rowCount();
+                if ($result == 0) {
 
 
-            // Vérification de la conformité du mot de passe :
+            // Vérification du mot de passe rempli deux fois :
 
-                    if (preg_match('/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/', $Mdp)) {
-
-
-                // Vérification de la conformité du téléphone :
-
-                        if (preg_match('/^0\d{9}$/', $Telephone)) {
+                    if($Mdp == $MdpConfirm) {
 
 
-                            // Création de la clé de confirmaton mail :  :
+                // Vérification de la conformité du mot de passe :
 
-                            $Key = bin2hex(random_bytes(16));
-    
-
-                            // Hashage du Mdp :
-
-                            $option = [
- /*pas fou*/                               'cost' => 12,
-                            ];
-                            $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option); 
-                    
-
-                    // Insertion des données :
+                        if (preg_match('/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/', $Mdp)) {
 
 
-                            $sql = "INSERT INTO utilisateur(Nom, Prenom, Tel, Adresse, Ville, CodePostal, Email, MDP, ConfirmKey) VALUES(:Nom, :Prenom, :Tel, :Adresse, :Ville, :CodePostal, :Email, :MDP, :ConfirmKey)";
-                            $stmt = $db->prepare($sql);
+                    // Vérification de la conformité du téléphone :
+
+                            if (preg_match('/^0\d{9}$/', $Telephone)) {
 
 
-                            // Spécification des paramètres de la requête :
+                                // Création de la clé de confirmaton mail :  :
 
-                            $params = [
-                                ':Nom' => ['value' => $Nom, 'type' => PDO::PARAM_STR],
-                                ':Prenom' => ['value' => $Prenom, 'type' => PDO::PARAM_STR],
-                                ':Tel' => ['value' => $Telephone, 'type' => PDO::PARAM_STR],
+                                $Key = bin2hex(random_bytes(16));
+        
 
-                                ':Adresse' => ['value' => $Adresse, 'type' => PDO::PARAM_STR],
-                                ':Ville' => ['value' => $Ville, 'type' => PDO::PARAM_STR],
-                                ':CodePostal' => ['value' => $CodePostal, 'type' => PDO::PARAM_STR],
-                                ':Email' => ['value' => $Email, 'type' => PDO::PARAM_STR],
-                                ':MDP' => ['value' => $hashpass, 'type' => PDO::PARAM_STR],
-                                ':ConfirmKey' => ['value' => $Key, 'type' => PDO::PARAM_STR]
-                            ];
+                                // Hashage du Mdp :
 
-                            // Liaison des paramètres avec spécification des types de données :
+                                $option = [
+    /*pas fou*/                               'cost' => 12,
+                                ];
+                                $hashpass = password_hash($Mdp, PASSWORD_BCRYPT, $option); 
+                        
 
-                            foreach ($params as $Parametre => $param) {
-                                $stmt->bindValue($Parametre, $param['value'], $param['type']);
-                            }
-                            
-                            $stmt->execute();
-                            
-                            //  :
+                        // Insertion des données :
 
 
-                            $Message = '<p class="AjoutPhp">Inscription réalisée avec succès</p>';
+                                $sql = "INSERT INTO utilisateur(Nom, Prenom, Tel, Adresse, Ville, CodePostal, Email, MDP, ConfirmKey) VALUES(:Nom, :Prenom, :Tel, :Adresse, :Ville, :CodePostal, :Email, :MDP, :ConfirmKey)";
+                                $stmt = $db->prepare($sql);
 
-                        } else { $Message = '<p class="AjoutPhp">Le numéro de téléphone ' . "n'est pas valide !</p>"; }
 
-                    } else { $Message = '<p class="AjoutPhp">Le mot ' . " n'est pas conforme !</p>"; }
+                                // Spécification des paramètres de la requête :
 
-                } else { $Message = '<p class="AjoutPhp">La confirmation du mot de passe est différente de celui-ci !</p>'; }
+                                $params = [
+                                    ':Nom' =>  $Nom,
+                                    ':Prenom' => $Prenom,
+                                    ':Tel' => $Telephone,
+                                    ':Adresse' => $Adresse,
+                                    ':Ville' => $Ville,
+                                    ':CodePostal' => $CodePostal,
+                                    ':Email' => $Email,
+                                    ':MDP' => $hashpass,
+                                    ':ConfirmKey' => $Key
+                                ];
 
-            } else { $Message = '<p class="AjoutPhp">Email déjà utilisé pour un autre compte !</p>'; }
+                                // Liaison des paramètres avec spécification des types de données :
 
-        } else { $Message = '<p class="AjoutPhp">Un des champs ' . "n'a pas été rempli</p>"; }
+                                foreach ($params as $Parametre => $Value) {
+                                    $stmt->bindValue($Parametre, $Value, PDO::PARAM_STR);
+                                }
+                                
+                                $stmt->execute();
+                                
+                                //  :
+
+
+                                $Message = 'Inscription réalisée avec succès !';
+
+                            } else { $Message = 'Le numéro de téléphone n\'est pas valide !'; }
+
+                        } else { $Message = 'Le mot n\'est pas conforme !'; }
+
+                    } else { $Message = 'La confirmation du mot de passe est différente de celui-ci !'; }
+
+                } else { $Message = 'Email déjà utilisé pour un autre compte !'; }
+
+            } else { $Message = 'Email non valide !'; }
+        
+        } else { $Message = 'Un des champs n\'a pas été rempli !'; }
 
     } 
+    
+    $Message = htmlspecialchars($Message, ENT_QUOTES, 'UTF-8');
 ?>
 
 <!DOCTYPE html>
@@ -180,14 +193,14 @@ extraction        $Prenom = filter_input(INPUT_POST, 'Prenom', FILTER_SANITIZE_S
                 <form method="post" class="formulaire">
                     <div>
                         <div>
-                            <input type="text" name="Nom" id="Nom" placeholder="Nom" value="<?= htmlspecialchars($RecupNom) ?>" required>
-                            <input type="text" name="Prenom" id="Prenom" placeholder="Prenom" value="<?= htmlspecialchars($RecupPrenom) ?>" required>
-                            <input type="text" name="Telephone" id="Telephone" placeholder="Téléphone (06 03..." value="<?= htmlspecialchars($RecupTelephone) ?>" required>
+                            <input type="text" name="Nom" id="Nom" placeholder="Nom" value="<?= htmlspecialchars($RecupNom, ENT_QUOTES, 'UTF-8') ?>" required>
+                            <input type="text" name="Prenom" id="Prenom" placeholder="Prenom" value="<?= htmlspecialchars($RecupPrenom, ENT_QUOTES, 'UTF-8') ?>" required>
+                            <input type="text" name="Telephone" id="Telephone" placeholder="Téléphone (06 03..." value="<?= htmlspecialchars($RecupTelephone, ENT_QUOTES, 'UTF-8') ?>" required>
                         </div>
                         <div>
-                            <input type="text" name="Adresse" id="Adresse" placeholder="Adresse" value="<?= htmlspecialchars($RecupAdresse) ?>" required>
-                            <input type="text" name="Ville" id="Ville" placeholder="Ville" value="<?= htmlspecialchars($RecupVille) ?>" required>
-                            <input type="text" name="CodePostal" id="CodePostal" placeholder="Code Postal" value="<?= htmlspecialchars($RecupCodePostal) ?>" required>
+                            <input type="text" name="Adresse" id="Adresse" placeholder="Adresse" value="<?= htmlspecialchars($RecupAdresse, ENT_QUOTES, 'UTF-8') ?>" required>
+                            <input type="text" name="Ville" id="Ville" placeholder="Ville" value="<?= htmlspecialchars($RecupVille, ENT_QUOTES, 'UTF-8') ?>" required>
+                            <input type="text" name="CodePostal" id="CodePostal" placeholder="Code Postal" value="<?= htmlspecialchars($RecupCodePostal, ENT_QUOTES, 'UTF-8') ?>" required>
                         </div>
                     </div>
 
@@ -195,7 +208,7 @@ extraction        $Prenom = filter_input(INPUT_POST, 'Prenom', FILTER_SANITIZE_S
                         <div>
                             <span class="dividerForm"></span>
 
-                            <input type="email" name="Email" id="Email" placeholder="Email" value="<?= htmlspecialchars($RecupEmail) ?>" required> 
+                            <input type="email" name="Email" id="Email" placeholder="Email" value="<?= htmlspecialchars($RecupEmail, ENT_QUOTES, 'UTF-8') ?>" required> 
                         
                             <div>
                                 <input type="password" name="Mdp" id="Mdp" placeholder="Mot de passe" value="aaaaaaaA!" required>
@@ -209,7 +222,9 @@ extraction        $Prenom = filter_input(INPUT_POST, 'Prenom', FILTER_SANITIZE_S
                 </form>
                 
                 <?=
-                    $Message
+                    '<p class="AjoutPhp">'.
+                    $Message.
+                    '</p>'
                 ?>
 
                 <div class="liensDessous">
